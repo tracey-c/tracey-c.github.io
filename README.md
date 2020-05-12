@@ -1,16 +1,124 @@
-### 欢迎来到若泽数据，感谢大家对我们的支持.
---------------------------------------------------------------------
+# Install Hexo
 
-#### Join us if you have a dream. 
+Install Node.js  and Git
 
-* 若泽数据官网[http://ruozedata.com](http://ruozedata.com)      
-* 腾讯课堂(直播课)，搜若泽数据 [http://ruoze.ke.qq.com](http://ruoze.ke.qq.com)
-* Bilibili网站(视频),搜若泽数据 [https://space.bilibili.com/356836323](https://space.bilibili.com/356836323)
+```
+#For window
+Node.js https://nodejs.org/dist/v12.13.0/node-v12.13.0-x64.msi
+Git https://github.com/git-for-windows/git/releases/download/v2.24.0.windows.2/Git-2.24.0.2-64-bit.exe
 
-* [若泽大数据--官方博客(当前)](https://ruozedata.github.io)
-* [若泽大数据--博客一览(早期)](https://github.com/ruozedata/BigData/blob/master/blog/BigDataBlogOverview.md)
-* [若泽大数据--内部学员面试题](https://github.com/ruozedata/BigData/blob/master/interview/%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98.md)  
 
-### 扫一扫，学一学:
- ![image](https://github.com/Hackeruncle/BigData/blob/master/blog/pic/%E8%8B%A5%E6%B3%BD%E6%95%B0%E6%8D%AE--%E6%89%AB%E6%8F%8F%E5%85%A5%E5%8F%A3.png?raw=true)  
-##### 有任何疑问的，QQ加课程顾问-星星: `1952249535`、或微信(`ruoze_star`)扫码，邀请进群与大佬交流。
+#For Mac
+brew install node
+brew install git
+```
+
+Install hexo
+
+```shell
+npm install hexo-cli -g
+
+#For more:https://hexo.io/zh-cn/index.html
+```
+
+# Theme Usage
+
+## Init
+
+---
+```bash
+git clone https://github.com/tracey-c/tracey-c.git ./tracey-c-hexo
+cd tracey-c-hexo
+npm install
+```
+
+## Modify
+---
+Modify `_config.yml` file with your own info.
+Especially the section:
+### Deployment
+Replace to your own repo, the name is the same as github user name!
+```yml
+deploy:
+  type: git
+  repo: git@github.com:<git user name>/<git user name>.github.io.git
+  branch: master
+```
+
+### Sidebar settings
+Copy your avatar image to `<root>/img/` and modify the `_config.yml`:
+```yml
+sidebar: true    # whether or not using Sidebar.
+sidebar-about-description: "<your description>"
+sidebar-avatar: img/<your avatar path>
+```
+and activate your personal widget you like
+```yml
+widgets:         # here are widget you can use, you can comment out
+- featured-tags
+- short-about
+- recent-posts
+- friends-blog
+- archive
+- category
+```
+if you want to add sidebar widget, please add at `layout/_widget`.
+### Signature Setup
+Copy your signature image to `<root>/img/signature` and modify the `_config.yml`:
+```yml
+signature: true   # show signature
+signature-img: img/signature/<your-signature-ID>
+```
+### Go to top icon Setup
+My icon is using iron man, you can change to your own icon at `css/image`.
+
+### Post tag
+You can decide to show post tags or not.
+```yml
+home_posts_tag: true
+```
+
+### Markdown render
+My markdown render engine plugin is [hexo-renderer-markdown-it](https://github.com/celsomiranda/hexo-renderer-markdown-it).
+```yml
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: '“”‘’'
+```
+and if you want to change the header anchor 'ℬ', you can go to `layout/post.ejs` to change it.
+```javascript
+async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: ℬ // this is the header anchor "unicode" icon
+        };
+```
+
+## Hexo Basics
+---
+### Push hexo file to github:
+```bash
+git add .
+git commit -m 'init'
+git push -u origin master
+```
+
+### Push hexo blog html to local : 
+```bash
+hexo clean && hexo generate && hexo server
+```
+open web: [http://localhost:4000](http://localhost:4000)
+
+### Push hexo blog html to github :
+```bash
+hexo clean && hexo deploy
+```
+open web: [https://tracey-c.github.io](https://tracey-c.github.io)
