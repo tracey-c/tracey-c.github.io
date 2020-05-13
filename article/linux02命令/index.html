@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Linux01命令 - tracey | Blog
+          Linux02命令 - tracey | Blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/article/linux01命令/">
+    <link rel="canonical" href="http://yoursite.com/article/linux02命令/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -92,14 +92,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#Linux01" title="Linux01">Linux01</a>
+                              <a class="tag" href="/tags/#Linux02" title="Linux02">Linux02</a>
                             
                         </div>
-                        <h1>Linux01命令</h1>
-                        <h2 class="subheading">This is linux01 theme.</h2>
+                        <h1>Linux02命令</h1>
+                        <h2 class="subheading">This is linux02 theme.</h2>
                         <span class="meta">
                             Posted by tracey on
-                            2019-07-11
+                            2019-07-18
                         </span>
                     </div>
                 
@@ -216,45 +216,173 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="1root用户了解">1.root用户了解</h4>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@learn04 ~]#</span><br></pre></td></tr></table></figure>
-<p>root： 默认管理员(超级管理员)  最大权限<br>
-learn04： 机器名称 pwd 查看当前所在路径<br>
-~：当前该用户的家目录用  /root<br>
-#     代表的当前用户为root<br>
-$：代表当前是普通用户操作</p>
-<h4 id="2ls查看命令">2.ls查看命令</h4>
-<p>ls 显示文件夹及文件<br>
-ls -l 长格式 显示权限 文件数 用户 用户组 文件大小 时间 文件名<br>
-ls -l -a 显示隐藏文件 文件夹<br>
-ls -l -h 仅仅查看文件大小<br>
-ls -l -r -t 按时间排序（快速找到排序文件-r sort -t time）<br>
-<strong>等价</strong><br>
-ls -1 &lt;=&gt; ll<br>
-ls -l -a  &lt;=&gt; ll -a<br>
-ls -l -h &lt;=&gt; ll -h<br>
-ls -l -r -t &lt;=&gt; ll -rt</p>
-<h4 id="3mkdir-创建目录命令">3.mkdir 创建目录命令</h4>
-<p>mkdir [-p] dirName<br>
-mkdir dir1 dir2 dir3 创建三个目录（并联创建）<br>
-mkdir -p dir4/dir5/dir6( 串 级联创建) ,加-p原本目录下创建目录（如无原本目录，同时创建原本目录）</p>
-<h4 id="4cd切换目录路径命令">4.cd切换目录路径命令</h4>
-<p>cd / 切换到根目录<br>
-cd …/  回到上一级目录<br>
-cd …/…/  返回上两级目录<br>
-cd - 回退到上一次的目录<br>
-cd ~切换到用户主目录<br>
-		root用户家目录切换三种方法：<br>
-					* cd /root<br>
-					* cd 直接回车 (推荐）<br>
-					* cd ~<br>
-		普通用户家目录切换三种方法：<br>
-					* cd /home/xx<br>
-					* cd 直接回车<br>
-					* cd ~</p>
-<h4 id="5help命令帮助">5.help命令帮助</h4>
-<p>[commmand] --help 命令帮助查询使用参数<br>
-eg：ls --help Usage: ls [OPTION]… [FILE]… []标识的  可选  …  多个参数</p>
+                <h4 id="1清屏">1.清屏</h4>
+<p>clear或快捷键ctrl + l</p>
+<h4 id="2移动mv-复制cp命令">2.移动(mv)、复制(cp)命令</h4>
+<p>2.1 mv [source] [target] (mv是始终一份  快)<br>
+ eg:不标准写法:mv dir1  data<br>
+ eg:标准写法:mv dir1  data/dir1 支持改名mv dir1  data/dir111<br>
+2.2 cp [-R/r]  [原文件或目录][目标目录](cp是两份  慢)<br>
+ eg:不标准写法:cp -r dir2 data<br>
+ eg:标准写法:cp -r dir2 data/dir2 支持改名mv dir2  data/dir222</p>
+<h4 id="3创建文件或目录">3.创建文件或目录</h4>
+<p>3.1 创建文件（三种方法如下）<br>
+（a）touch 空文件<br>
+eg:touch test.txt<br>
+（b）vi  1.log (详见vi编辑器)</p>
+<blockquote>
+<p>默认命令行<br>
+	i键 编辑模式，进行编辑<br>
+	esc键 从编辑模式–》命令行模式<br>
+shift+:键 从命令行模式–》尾行模式，输入wq 保存退出</p>
+</blockquote>
+<hr>
+<p><strong>© echo “data” &gt; 2.log 创建或覆盖 <font color="red"> 【高危】 </font></strong></p>
+<p>3.2 mkdir [-p] 目录<br>
+  eg:mkdir dir1 dir2 dir3 创建三个目录（并联创建）<br>
+  eg:mkdir -p dir4/dir5/dir6( 串 级联创建) ,加-p原本目录下创建目录（如无原本目录，同时创建原本目录</p>
+<h4 id="4vi文件编辑器创建或编辑已有">4.vi文件编辑器(创建或编辑已有）</h4>
+<p>4.1 eg: vi   ts.log</p>
+<blockquote>
+<p>1.命令模式 默认命令行<br>
+2.编辑模式(按i或a进入)（按Esc退出 从编辑模式–》命令行模式）<br>
+3.尾行模式 (shift+:键 从命令行模式–》尾行模式)<br>
+     wq!强制保存并退出<br>
+   w 保存<br>
+   w!  强制保存<br>
+   q 退出<br>
+   q!  强制退出</p>
+</blockquote>
+<p>4.2 vi 查找搜索<br>
+  vi xxx.log<br>
+<em>  shift+: / ERROR(查找error关键字)</em></p>
+<h4 id="5查看文件内容">5.查看文件内容</h4>
+<p>5.1 cat<br>
+  cat [-n] 文件名<br>
+   -n 显示行号<br>
+   查看文件内容（推荐查看小文件）ctrl+z 中断</p>
+<blockquote>
+<p>cat 文件内容超多  定位ERROR 信息<br>
+cat xxx.log | grep ERROR   当前行<br>
+cat xxx.log | grep -A 5 ERROR   后5行<br>
+cat xxx.log | grep -B 5 ERROR   前5行<br>
+cat xxx.log | grep -C 5 ERROR   前后各5行</p>
+</blockquote>
+<p>5.2 more<br>
+  more 文件名<br>
+   空格或f 翻页（一页一页的往后显示）<br>
+5.3 less<br>
+  less 文件名<br>
+   按上下键   q退出<br>
+5.4 head<br>
+  head -n [文件名]<br>
+   查看文件的前n（正整数）行<br>
+   -不加-n选项，表示默认查看前10行的内容<br>
+5.5 tail 实时查看<br>
+  tail -f xxx.log （中途中断易丢失数据）<br>
+  tail -F yyy.log   =-f+ retry（大数据Flume组件 exec source ）</p>
+<blockquote>
+<p>场景: 采集业务log日志内容 log4j<br>
+规则: 每份100m 保留10份<br>
+系统–》 erp.log 90m …100m<br>
+  mv erp.log  erp.log1(数据满后，移动新建文件名继续接收新数据）<br>
+  touch erp.log<br>
+  ll命令查看<br>
+  erp.log<br>
+  erp.log1<br>
+  erp.log2<br>
+  …<br>
+  erp.log10</p>
+</blockquote>
+<hr>
+<ul>
+<li>查找错误日志<br>
+(a) tail -100F   xxx.log  错误的<br>
+(b) cat xxx.log | grep -C 5 ERROR 如 xxx.log ERROR很多  上万个<br>
+  cat xxx.log | grep -C 5 ERROR &gt; 20200418error.log<br>
+  more 20200418error.log<br>
+©vi xxx.log 文件内容100m   :<br>
+  vi xxx.log<br>
+  shift+:<br>
+    /<br>
+    ERROR<br>
+    n寻找<br>
+    下载到window<br>
+    editplus（window）<br>
+    notepad++<br>
+    sublime（widnow  mac）工具 搜索  统计 校验</li>
+</ul>
+<h4 id="6echo-命令">6.echo 命令</h4>
+<p>  (a) echo “hello world” 打印命令<br>
+  (b) echo “data” &gt;&gt; 3.log 追加<br>
+  © echo “data” &gt; 3.log 创建或覆盖 <font color="red"> 【高危】同上3.1（c） </font></p>
+<h4 id="7rzsz上传下载">7.rzsz上传下载</h4>
+<p>  安装工具包 yum install -y lrzsz<br>
+  sz xxx.log是下载 Linux–》window<br>
+  rz 是上传   window–》Linux</p>
+<h4 id="8alias别名">8.alias别名</h4>
+<p>alias 回车查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alias cp=&apos;cp -i&apos;</span><br><span class="line">alias egrep=&apos;egrep --color=auto&apos;</span><br><span class="line">alias fgrep=&apos;fgrep --color=auto&apos;</span><br><span class="line">alias grep=&apos;grep --color=auto&apos;</span><br><span class="line">alias l.=&apos;ls -d .* --color=auto&apos;</span><br><span class="line">alias ll=&apos;ls -l --color=auto&apos;</span><br><span class="line">alias ls=&apos;ls --color=auto&apos;</span><br><span class="line">alias mv=&apos;mv -i&apos;</span><br><span class="line">alias rm=&apos;rm -i&apos;</span><br></pre></td></tr></table></figure>
+<p>建alias jj='cd /tmp’<br>
+当前窗口创建临时生效<br>
+vi /etc/profile配置永久生效(所有用户可用）私用~/.bashrc</p>
+<h4 id="9环境变量">9.环境变量</h4>
+<p>全局:<br>
+/etc/profile 所有用户都可以使用<br>
+个人:<br>
+~/.bash_profile  ssh 远程执行B机器 命令  找不到<br>
+~/.bashrc<font color="blue"> (推荐)</font> ssh 远程 配置在.bashrc文件<br>
+生效文件<br>
+source /etc/profile<br>
+source ~/.bash_profile<br>
+source ~/.bashrc或 . .bashrc</p>
+<h4 id="10创建用户设置密码">10.创建用户/设置密码</h4>
+<p>(a) 创建用户:useradd 用户名<br>
+  root 默认管理员用户 已存在的<br>
+  jacket</p>
+<blockquote>
+<p>[root@rzdata001 tmp]# useradd jacket<br>
+[root@rzdata001 tmp]# su - jacket<br>
+[jacket@rzdata001 ~]$ pwd<br>
+/home/jacket<br>
+[jacket@rzdatau001 ~]$<br>
+useradd --help<br>
+-G, --groups GROUPS<br>
+-U, --user-group<br>
+-u, --uid UID</p>
+</blockquote>
+<p>(b)设置密码:passwd 用户名<br>
+  passwd 回车 root密码设置<br>
+  passwd 用户名 对应用户密码设置</p>
+<h4 id="11history-历史命令">11.history 历史命令</h4>
+<p>!2  执行第二行命令<br>
+history -c 清空历史<br>
+场景：<br>
+  (a)直连 服务器 ok<br>
+  (b)跳板机(vpn)  服务器   ok<br>
+  ©堡垒机  敲一个命令 都记录</p>
+<h4 id="12rm删除命令-高危命令">12.rm删除命令<font color="red"> 【高危命令】</font></h4>
+<p>(a) ！！！不要做rm -rf /（所有数据清空）<br>
+(b) 脚本rm注意<br>
+场景:<br>
+  脚本里<br>
+  LOG_PATH=/xxx/yyy<br>
+  业务逻辑判断 去赋值<br>
+  漏了一种  没有赋值<br>
+  rm -rf ${LOG_PATH}/*  ==》rm -rf /*<br>
+如何避免：每次删除之前 都判断${LOG_PATH} 是否存在</p>
+<h4 id="13hostnamectl命令">13.hostnamectl命令</h4>
+<p>步骤一：hostnamectl set-hostname learn001<br>
+步骤二：ifconfig 查看IP<br>
+步骤三：vi /etc/hosts  添加ip hostname</p>
+<blockquote>
+<p>[root@JD ~]# hostnamectl set-hostname ruozedata001<br>
+[root@rzdata001 ~]# ifconfig 找内网ip 或者 京东云控制台查看<br>
+[root@rzdata001 ~]# vi /etc/hosts<br>
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4<br>
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6<br>
+192.168.0.8 rzdata001(添加这一行）</p>
+</blockquote>
 
                 
 
@@ -262,10 +390,10 @@ eg：ls --help Usage: ls [OPTION]… [FILE]… []标识的  可选  …  多个�
                 <!-- Pager -->
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/article/linux02命令/" data-toggle="tooltip" data-placement="top" title="Linux02命令">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/article/linux01命令/" data-toggle="tooltip" data-placement="top" title="Linux01命令">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -309,7 +437,7 @@ eg：ls --help Usage: ls [OPTION]… [FILE]… []标识的  可选  …  多个�
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1root用户了解"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1.root&#x7528;&#x6237;&#x4E86;&#x89E3;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2ls查看命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2.ls&#x67E5;&#x770B;&#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3mkdir-创建目录命令"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3.mkdir &#x521B;&#x5EFA;&#x76EE;&#x5F55;&#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4cd切换目录路径命令"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4.cd&#x5207;&#x6362;&#x76EE;&#x5F55;&#x8DEF;&#x5F84;&#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#5help命令帮助"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">5.help&#x547D;&#x4EE4;&#x5E2E;&#x52A9;</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1清屏"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1.&#x6E05;&#x5C4F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2移动mv-复制cp命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2.&#x79FB;&#x52A8;(mv)&#x3001;&#x590D;&#x5236;(cp)&#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3创建文件或目录"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3.&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4vi文件编辑器创建或编辑已有"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4.vi&#x6587;&#x4EF6;&#x7F16;&#x8F91;&#x5668;(&#x521B;&#x5EFA;&#x6216;&#x7F16;&#x8F91;&#x5DF2;&#x6709;&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#5查看文件内容"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">5.&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x5185;&#x5BB9;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#6echo-命令"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">6.echo &#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#7rzsz上传下载"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">7.rzsz&#x4E0A;&#x4F20;&#x4E0B;&#x8F7D;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#8alias别名"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">8.alias&#x522B;&#x540D;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9环境变量"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">9.&#x73AF;&#x5883;&#x53D8;&#x91CF;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#10创建用户设置密码"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">10.&#x521B;&#x5EFA;&#x7528;&#x6237;/&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#11history-历史命令"><span class="toc-nav-number">11.</span> <span class="toc-nav-text">11.history &#x5386;&#x53F2;&#x547D;&#x4EE4;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#12rm删除命令-高危命令"><span class="toc-nav-number">12.</span> <span class="toc-nav-text">12.rm&#x5220;&#x9664;&#x547D;&#x4EE4;<font color="red"> &#x3010;&#x9AD8;&#x5371;&#x547D;&#x4EE4;&#x3011;</font></span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#13hostnamectl命令"><span class="toc-nav-number">13.</span> <span class="toc-nav-text">13.hostnamectl&#x547D;&#x4EE4;</span></a></li></ol>
         
         </div>
       </aside>
@@ -329,7 +457,7 @@ eg：ls --help Usage: ls [OPTION]… [FILE]… []标识的  可选  …  多个�
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Linux01" title="Linux01">Linux01</a>
+                          <a class="tag" href="/tags/#Linux02" title="Linux02">Linux02</a>
                         
                     </div>
                 </section>
