@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Linux03命令 - tracey | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/article/linux03命令/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/undefined');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Linux03" title="Linux03">Linux03</a>
+                            
+                        </div>
+                        <h1>Linux03命令</h1>
+                        <h2 class="subheading">This is linux03 theme.</h2>
+                        <span class="meta">
+                            Posted by tracey on
+                            2019-07-18
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">tracey</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="1查看用户-用户组">1.查看用户 用户组</h4>
+<p>  (1)用户：ll /usr/sbin/user*<br>
+  (2)用户组：ll /usr/sbin/group*<br>
+  用户存储信息 /etc/passwd<br>
+  用户组       /etc/group</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# ll /usr/sbin/user*</span><br><span class="line">-rwxr-x--- 1 root root 118192 Nov  6  2016 /usr/sbin/useradd</span><br><span class="line">-rwxr-x--- 1 root root  80360 Nov  6  2016 /usr/sbin/userdel</span><br><span class="line">-rwxr-x--- 1 root root 113840 Nov  6  2016 /usr/sbin/usermod</span><br><span class="line">-rwsr-xr-x 1 root root  11296 Apr 13  2017 /usr/sbin/usernetctl</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# ll /usr/sbin/group*</span><br><span class="line">-rwxr-x--- 1 root root 65480 Nov  6  2016 /usr/sbin/groupadd</span><br><span class="line">-rwxr-x--- 1 root root 57016 Nov  6  2016 /usr/sbin/groupdel</span><br><span class="line">-rwxr-x--- 1 root root 57064 Nov  6  2016 /usr/sbin/groupmems</span><br><span class="line">-rwxr-x--- 1 root root 76424 Nov  6  2016 /usr/sbin/groupmod</span><br></pre></td></tr></table></figure>
+<h4 id="2创建-删除用户-用户组">2.创建、删除用户 用户组</h4>
+<p>(1) 创建用户：useradd 用户名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# useradd jacket</span><br><span class="line">[root@learn01 ~]# id jacket</span><br><span class="line">uid=1004(jacket) gid=1004(jacket) groups=1004(jacket)</span><br><span class="line">[root@learn01 ~]#</span><br></pre></td></tr></table></figure>
+<p>id 用户名(jacket) 创建一个普通用户  用户名称 jacket<br>
+同时也会创建一个 jacket用户组<br>
+设置jacket用户的组为jacket,且把这个jacket用户组设置为 主组<br>
+同时也创建家目录  /home/jacket</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# ll /home</span><br><span class="line">drwx------   2 jacket  jacket    59 Apr 18 20:10 jacket</span><br></pre></td></tr></table></figure>
+<p>(2) 创建用户组：groupadd 组名<br>
+  groupadd bigdata<br>
+  添加用户到xx用户组： usermod    -a -G 组名 用户名<br>
+添加用户到bigdata用户组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# groupadd bigdata</span><br><span class="line">[root@learn01 ~]# usermod    -a -G bigdata      jacket</span><br><span class="line">[root@learn01 ~]# id jacket</span><br><span class="line">uid=1004(jacket) gid=1004(jacket) groups=1004(jacket),1005(bigdata)</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# usermod -g bigdata jacket</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[rroot@learn01 ~]# id jacket</span><br><span class="line">uid=1004(jacket) gid=1005(bigdata) groups=1005(bigdata)</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# usermod    -a -G jacket      jacket</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# id ruoze</span><br><span class="line">uid=1004(jacket) gid=1005(bigdata) groups=1005(bigdata),1004(jacket)</span><br></pre></td></tr></table></figure>
+<p>(3)删除用户 :userdel 用户名<br>
+  userdel jacket<br>
+  删除、恢复样式<br>
+  su - jacket --&gt;ll -a --&gt;rm -rf .bash* --&gt;exit–&gt;cp /etc/skel/.* ./ --&gt;exit–&gt;su - jacket<br>
+<strong>样式丢失</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# userdel jacket</span><br><span class="line">[root@learn01 ~]#  useradd jacket</span><br><span class="line">useradd: warning: the home directory already exists.</span><br><span class="line">Not copying any file from skel directory into it.</span><br><span class="line">Creating mailbox file: File exists</span><br><span class="line">[root@learn01 ~]#</span><br><span class="line">[root@learn01 ~]#  su - jacket</span><br><span class="line">Last login: Sun Apr 19 20:16:54 CST 2018 on pts/0</span><br><span class="line">[jacket@learn01 ~]$ ll -a</span><br><span class="line">total 16</span><br><span class="line">drwx------  2 jacket jacket  79 Apr 19 20:16 .</span><br><span class="line">drwxr-xr-x. 7 root  root   67 Apr 19 20:10 ..</span><br><span class="line">-rw-------  1 jacket jacket  28 Apr 19 20:17 .bash_history</span><br><span class="line">-rw-r--r--  1 jacket jacket  18 Apr 11  2018 .bash_logout</span><br><span class="line">-rw-r--r--  1 jacket jacket 193 Apr 11  2018 .bash_profile</span><br><span class="line">-rw-r--r--  1 jacket jacket 231 Apr 11  2018 .bashrc</span><br><span class="line">[jacket@learn01 ~]$ rm -rf .bash*</span><br><span class="line">[jacket@learn01 ~]$ ll -a</span><br><span class="line">total 0</span><br><span class="line">drwx------  2 jacket jacket  6 Apr 18 20:17 .</span><br><span class="line">drwxr-xr-x. 7 root  root  67 Apr 18 20:10 ..</span><br><span class="line">[jacket@learn01 ~]$ </span><br><span class="line">[jacket@learn01 ~]$ </span><br><span class="line">[jacket@learn01 ~]$ exit</span><br><span class="line">logout</span><br><span class="line">[root@learn01 ~]# su - jacket</span><br><span class="line">Last login: Sun Apr 19 20:17:08 CST 2018 on pts/0</span><br><span class="line">-bash-4.2$ </span><br><span class="line">-bash-4.2$ </span><br><span class="line">-bash-4.2$ </span><br><span class="line">-bash-4.2$ id</span><br><span class="line">uid=1004(jacket) gid=1004(jacket) groups=1004(jacket)</span><br><span class="line">-bash-4.2$ </span><br><span class="line">-bash-4.2$ cp /etc/skel/.* ./</span><br><span class="line">cp: omitting directory ‘/etc/skel/.’</span><br><span class="line">cp: omitting directory ‘/etc/skel/..’</span><br><span class="line">-bash-4.2$ ll -a</span><br><span class="line">total 16</span><br><span class="line">drwx------  2 jacket jacket  79 Apr 19 20:20 .</span><br><span class="line">drwxr-xr-x. 7 root  root   67 Apr 19 20:10 ..</span><br><span class="line">-rw-------  1 jacket jacket  39 Apr 19 20:18 .bash_history</span><br><span class="line">-rw-r--r--  1 jacket jacket  18 Apr 19 20:20 .bash_logout</span><br><span class="line">-rw-r--r--  1 jacket jacket 193 Apr 19 20:20 .bash_profile</span><br><span class="line">-rw-r--r--  1 jacket jacket 231 Apr 19 20:20 .bashrc</span><br><span class="line">-bash-4.2$</span><br></pre></td></tr></table></figure>
+<p><strong>样式恢复</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-bash-4.2$ </span><br><span class="line">-bash-4.2$ exit</span><br><span class="line">logout</span><br><span class="line">[root@learn01 ~]# su - jacket</span><br><span class="line"> Last login: Sun Apr 19 20:18:56 CST 2018 on pts/0</span><br></pre></td></tr></table></figure>
+<h4 id="3设置密码passwd">3.设置密码passwd</h4>
+<p>passwd 直接回车 修改root密码<br>
+passwd 用户名 修改对应用户密码</p>
+<h4 id="4切换用户">4.切换用户</h4>
+<p>(a) su 用户名（不建议不会执行环境文件）<br>
+(b) su - 用户名(推荐)代表该用户切换到家目录，且执行环境变量文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# pwd</span><br><span class="line">/root</span><br><span class="line">[root@learn01 ~]# su jacket</span><br><span class="line">[jacket@learn01 root]$ pwd</span><br><span class="line">/root</span><br><span class="line">[jacket@learn01 root]$ exit</span><br><span class="line">exit</span><br><span class="line">[root@learn01 ~]# su - jacket</span><br><span class="line">Last login: Sun Apr 19 20:33:23 CST 2018 on pts/2</span><br><span class="line">[jacket@learn01 ~]$ pwd</span><br><span class="line">/home/jacket</span><br></pre></td></tr></table></figure>
+<h4 id="5sudo-普通用户临时使用root的最大权限">5.sudo 普通用户临时使用root的最大权限</h4>
+<p>vi /etc/sudoers  添加：jacket   ALL=(root)      NOPASSWD:ALL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[jacket@learn01 ~]$ cat /root/rz.log</span><br><span class="line">cat: /root/rz.log: Permission denied</span><br><span class="line">[jacket@learn01 ~]$</span><br><span class="line">[jacket@learn01 ~]$ sudo cat /root/rz.log</span><br><span class="line">hello world</span><br><span class="line">[jacket@learn01 ~]$</span><br></pre></td></tr></table></figure>
+<h4 id="6etcpasswd文件">6./etc/passwd文件</h4>
+<p>tail -2 /etc/passwd<br>
+jacket:x:1004:1005::/home/jacket:/sbin/nologin  提示<br>
+jacket:x:1004:1005::/home/jacket:/usr/bin/false 没提示<br>
+CDH平台  hdfs yarn hive hbase<br>
+su - yarn 不成功的<br>
+/sbin/nologin /usr/bin/false ===》/bin/bash</p>
+<h4 id="7权限">7.权限</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[jacket@learn01 ~]# ll</span><br><span class="line">-rw-r--r-- 1 root root  9 Apr 18 20:50 22.log</span><br><span class="line">drwxr-xr-x 2 root root  6 Apr 15 22:12 dir3</span><br></pre></td></tr></table></figure>
+<p>drwxrwxr-x  第一位：d代表目录  -代表文件<br>
+后面九位，三个一组：rwx(所有者的权限)-&gt; u（user）       rwx(所属组的权限) -&gt;g（group）  r-x(其他用户权限) -&gt; o（other）rwx<br>
+  r: read  读权限 4  100(二进制)<br>
+  w: write 写权限 2   10(二进制)<br>
+  x: execute执行  1     1(二进制)<br>
+  -: 没权限       0  占位<br>
+<strong>关于修改权限:</strong><br>
+chmod -R 777          文件或文件夹<br>
+chown -R 用户:用户组  文件或文件夹<br>
+案例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[jacket@learn01 tmp]# vi jacket.log</span><br><span class="line">hello world</span><br><span class="line">[jacket@learn01 tmp]$ cat  jacket.log </span><br><span class="line">hello word</span><br><span class="line">[jacket@learn01 tmp]$ </span><br><span class="line">收回其他组的r权限 </span><br><span class="line">[root@learn01 tmp]# chmod 640 jacket.log</span><br><span class="line">[jacket@learn01 tmp]$ cat  jacket.log </span><br><span class="line">cat: jacket.log: Permission denied</span><br></pre></td></tr></table></figure>
+<h4 id="8查看文件或文件夹大小">8.查看文件或文件夹大小</h4>
+<p>8.1 文件： ll -h 、du -sh<br>
+8.2 文件夹:        du -sh</p>
+<h4 id="9搜索-find">9.搜索 find</h4>
+<p>接手大数据平台，服务器登录，大数据组件安装目录在哪？<br>
+find / -name '*hadoop*'<br>
+find /home/hadoop/ -name ‘*hadoop*’</p>
+<p>补充:<br>
+history 命令<br>
+ps -ef 查看进程</p>
+<h4 id="10vi命令">10.vi命令</h4>
+<p>10.1 正常编辑一个文件，要正常退出 wq<br>
+  反之(）:<font color="LimeGreen"> 坑1</font></p>
+<blockquote>
+<p>-rw-r–r--   1 root  root       16 Apr 19 21:26 2.log<br>
+-rw-r–r--   1 root  root    12288 Apr 19 21:31 .2.log.swp<br>
+需要 rm -rf .2.log.swp</p>
+</blockquote>
+<p>10.2 粘贴的<font color="LimeGreen"> 坑2</font>，必须进入编辑模式i，否则第一行内容丢失 不完整<br>
+10.3 搜索 尾行模式–》 /error<br>
+10.4设置或取消行号<br>
+  尾行–》 set nu   设置行号<br>
+  set nonu 取消行号<br>
+  f 也是可以显示 当前光标的所在的行<br>
+10.5 常用快捷方式<br>
+  dd 删除当前行<br>
+  dG 删除当前及以下所有行<br>
+  ndd 删除当前及以下n行<br>
+  gg 跳转到第一行的第一个字母<br>
+  G  跳转到最后一行的第一个字母<br>
+  shift+$ 行尾</p>
+<p><strong>场景:</strong><br>
+清空这个文件内容，从另外一个文件内容 拷贝过来<br>
+gg–》dG   --》 i  --&gt;鼠标右键单击 粘贴上<br>
+ggdG 清空</p>
+<p>清空补充：<br>
+(i)cat /dev/null &gt; 1.log<br>
+(ii)<strong>注意</strong> echo  “” &gt; 2.log (有字节，不是0字节不建议）</p>
+<blockquote>
+<p>[root@learn01 ~]# ll<br>
+total 16<br>
+-rw-r–r-- 1 root  root     0 Apr 18 21:58 1.log<br>
+-rw-r–r-- 1 root  root     1 Apr 18 21:58 2.log</p>
+</blockquote>
+<p><strong>场景:</strong><br>
+shell脚本，数据文件清空操作，根据字节大小判断是否清空完成<br>
+echo  “” &gt; 2.log<br>
+if filezie &gt; 0 then<br>
+  业务不操作<br>
+else<br>
+  2.log 灌业务数据</p>
+<p>(iii)true &gt; 1.log 也是清空文件内容 0字节</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/MySQL01/" data-toggle="tooltip" data-placement="top" title="MySQL01(安装部署)">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/linux04命令/" data-toggle="tooltip" data-placement="top" title="Linux04命令">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1查看用户-用户组"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1.&#x67E5;&#x770B;&#x7528;&#x6237; &#x7528;&#x6237;&#x7EC4;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2创建-删除用户-用户组"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2.&#x521B;&#x5EFA;&#x3001;&#x5220;&#x9664;&#x7528;&#x6237; &#x7528;&#x6237;&#x7EC4;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3设置密码passwd"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3.&#x8BBE;&#x7F6E;&#x5BC6;&#x7801;passwd</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4切换用户"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4.&#x5207;&#x6362;&#x7528;&#x6237;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#5sudo-普通用户临时使用root的最大权限"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">5.sudo &#x666E;&#x901A;&#x7528;&#x6237;&#x4E34;&#x65F6;&#x4F7F;&#x7528;root&#x7684;&#x6700;&#x5927;&#x6743;&#x9650;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#6etcpasswd文件"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">6./etc/passwd&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#7权限"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">7.&#x6743;&#x9650;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#8查看文件或文件夹大小"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">8.&#x67E5;&#x770B;&#x6587;&#x4EF6;&#x6216;&#x6587;&#x4EF6;&#x5939;&#x5927;&#x5C0F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9搜索-find"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">9.&#x641C;&#x7D22; find</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#10vi命令"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">10.vi&#x547D;&#x4EE4;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Linux03" title="Linux03">Linux03</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/tracey-c/tracey-c.github.io" target="_blank">tracey友链</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'rz'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<!-- chrome Firefox 中文锚点定位失效-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- smooth scroll behavior polyfill  -->
+<script type="text/javascript" src="/js/smoothscroll.js"></script>
+<script>
+        $('#toc').on('click','a',function(a){
+            // var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+            // console.log(window.navigator.userAgent,isChrome)
+                // if(isChrome) {
+                    // console.log(a.currentTarget.outerHTML);
+                    // console.log($(a.currentTarget).attr("href"));
+                    //跳转到指定锚点
+                    // document.getElementById(a.target.innerText.toLowerCase()).scrollIntoView(true);
+                    document.getElementById($(a.currentTarget).attr("href").replace("#","")).scrollIntoView({behavior: 'smooth' });
+                // }
+        })  
+</script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/tracey-c">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tracey 2020
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    re-Ported by <a href="http://tracey-c.github.io">tracey</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=tracey-c&repo=tracey-c.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
