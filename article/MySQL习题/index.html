@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          MySQL-数据库9道题 - tracey | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/article/MySQL习题/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/undefined');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#MySQL-execises" title="MySQL-execises">MySQL-execises</a>
+                            
+                        </div>
+                        <h1>MySQL-数据库9道题</h1>
+                        <h2 class="subheading">This is MySQL execises theme.</h2>
+                        <span class="meta">
+                            Posted by tracey on
+                            2019-08-02
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">tracey</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="创建表">创建表</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">-- 1 部门表</span><br><span class="line">-- dept部门表(deptno部门编号/dname部门名称/loc地点)</span><br><span class="line">drop table IF EXISTS dept;</span><br><span class="line">create table dept (</span><br><span class="line">    deptno numeric(2),</span><br><span class="line">    dname varchar(14),</span><br><span class="line">    loc varchar(13)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into dept values (10, &apos;ACCOUNTING&apos;, &apos;NEW YORK&apos;);</span><br><span class="line">insert into dept values (20, &apos;RESEARCH&apos;, &apos;DALLAS&apos;);</span><br><span class="line">insert into dept values (30, &apos;SALES&apos;, &apos;CHICAGO&apos;);</span><br><span class="line">insert into dept values (40, &apos;OPERATIONS&apos;, &apos;BOSTON&apos;);</span><br><span class="line"></span><br><span class="line">-- 2 工资等级表</span><br><span class="line">-- salgrade工资等级表(grade 等级/losal此等级的最低/hisal此等级的最高)</span><br><span class="line">drop table IF EXISTS salgrade;</span><br><span class="line">create table salgrade (</span><br><span class="line">    grade numeric,</span><br><span class="line">    losal numeric,</span><br><span class="line">    hisal numeric</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into salgrade values (1, 700, 1200);</span><br><span class="line">insert into salgrade values (2, 1201, 1400);</span><br><span class="line">insert into salgrade values (3, 1401, 2000);</span><br><span class="line">insert into salgrade values (4, 2001, 3000);</span><br><span class="line">insert into salgrade values (5, 3001, 9999);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- 3 员工表</span><br><span class="line">-- emp员工表(empno员工号/ename员工姓名/job工作/mgr上级编号</span><br><span class="line">/hiredate受雇日期/sal工资/comm佣金/deptno部门编号)</span><br><span class="line">-- 薪金 ＝ 工资 ＋ 佣金</span><br><span class="line"></span><br><span class="line">drop table IF EXISTS emp;</span><br><span class="line">create table emp (</span><br><span class="line">    empno numeric(4) not null,</span><br><span class="line">    ename varchar(10),</span><br><span class="line">    job varchar(9),</span><br><span class="line">    mgr numeric(4),</span><br><span class="line">    hiredate datetime,</span><br><span class="line">    sal numeric(7, 2),</span><br><span class="line">    comm numeric(7, 2),</span><br><span class="line">    deptno numeric(2)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into emp values (7369, &apos;SMITH&apos;, &apos;CLERK&apos;, 7902, &apos;1980-12-17&apos;, 800, null, 20);</span><br><span class="line">insert into emp values (7499, &apos;ALLEN&apos;, &apos;SALESMAN&apos;, 7698, &apos;1981-02-20&apos;, 1600, 300, 30);</span><br><span class="line">insert into emp values (7521, &apos;WARD&apos;, &apos;SALESMAN&apos;, 7698, &apos;1981-02-22&apos;, 1250, 500, 30);</span><br><span class="line">insert into emp values (7566, &apos;JONES&apos;, &apos;MANAGER&apos;, 7839, &apos;1981-04-02&apos;, 2975, null, 20);</span><br><span class="line">insert into emp values (7654, &apos;MARTIN&apos;, &apos;SALESMAN&apos;, 7698, &apos;1981-09-28&apos;, 1250, 1400, 30);</span><br><span class="line">insert into emp values (7698, &apos;BLAKE&apos;, &apos;MANAGER&apos;, 7839, &apos;1981-05-01&apos;, 2850, null, 30);</span><br><span class="line">insert into emp values (7782, &apos;CLARK&apos;, &apos;MANAGER&apos;, 7839, &apos;1981-06-09&apos;, 2450, null, 10);</span><br><span class="line">insert into emp values (7788, &apos;SCOTT&apos;, &apos;ANALYST&apos;, 7566, &apos;1982-12-09&apos;, 3000, null, 20);</span><br><span class="line">insert into emp values (7839, &apos;KING&apos;, &apos;PRESIDENT&apos;, null, &apos;1981-11-17&apos;, 5000, null, 10);</span><br><span class="line">insert into emp values (7844, &apos;TURNER&apos;, &apos;SALESMAN&apos;, 7698, &apos;1981-09-08&apos;, 1500, 0, 30);</span><br><span class="line">insert into emp values (7876, &apos;ADAMS&apos;, &apos;CLERK&apos;, 7788, &apos;1983-01-12&apos;, 1100, null, 20);</span><br><span class="line">insert into emp values (7900, &apos;JAMES&apos;, &apos;CLERK&apos;, 7698, &apos;1981-12-03&apos;, 950, null, 30);</span><br><span class="line">insert into emp values (7902, &apos;FORD&apos;, &apos;ANALYST&apos;, 7566, &apos;1981-12-03&apos;, 3000, null, 20);</span><br><span class="line">insert into emp values (7934, &apos;MILLER&apos;, &apos;CLERK&apos;, 7782, &apos;1982-01-23&apos;, 1300, null, 10);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from  dept;</span><br><span class="line">select * from  emp;</span><br><span class="line">select * from  salgrade;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/mysql_img/dept.png" alt="avatar"><br>
+<img src="/img/mysql_img/emp.png" alt="avatar"><br>
+<img src="/img/mysql_img/salgrade.png" alt="avatar"></p>
+<h4 id="1-查询出部门编号为30的所有员工的编号和姓名">1. 查询出部门编号为30的所有员工的编号和姓名</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select empno,ename from emp where deptno = 30;</span><br></pre></td></tr></table></figure>
+<h4 id="2找出部门编号为10中所有经理和部门编号为20中所有销售员的详细资料">2.找出部门编号为10中所有经理，和部门编号为20中所有销售员的详细资料。</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from emp </span><br><span class="line">where (deptno=10 and job=&apos;manager&apos;) or (deptno=20 and job=&apos;SALESMAN&apos;);</span><br></pre></td></tr></table></figure>
+<h4 id="3查询所有员工详细信息用工资降序排序如果工资相同使用入职日期升序排序">3.查询所有员工详细信息，用工资降序排序，如果工资相同使用入职日期升序排序</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp ORDER BY sal desc,hiredate asc;</span><br></pre></td></tr></table></figure>
+<h4 id="4列出薪金大于1500的各种工作及从事此工作的员工人数">4.列出薪金大于1500的各种工作及从事此工作的员工人数。</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select job,count(empno) from </span><br><span class="line">(select job,sal+ifnull(comm,0),empno </span><br><span class="line">from emp </span><br><span class="line">where sal+ifnull(comm,0)&gt;1500) as empnew  GROUP BY job;</span><br></pre></td></tr></table></figure>
+<h4 id="5列出在销售部工作的员工的姓名假定不知道销售部的部门编号">5.列出在销售部工作的员工的姓名，假定不知道销售部的部门编号。</h4>
+<p>解一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select e.ename</span><br><span class="line">from dept as d</span><br><span class="line">INNER JOIN emp as e on d.deptno=e.deptno where d.dname=&apos;SALES&apos;;</span><br></pre></td></tr></table></figure>
+<p>解二(子查询):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select e.ename </span><br><span class="line">from emp e where e.deptno=(select deptno from deptwhere dname=&apos;SALES&apos;);</span><br></pre></td></tr></table></figure>
+<h4 id="6查询姓名以s开头的以s结尾包含s字符第二个字母为l">6.查询姓名以S开头的\以S结尾\包含S字符\第二个字母为L</h4>
+<p>合并写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from emp</span><br><span class="line">where ename like &apos;S%&apos; or ename like &apos;%S&apos; or ename like &apos;%S%&apos; or ename like &apos;_L%&apos;;</span><br></pre></td></tr></table></figure>
+<h4 id="7查询每种工作的最高工资-最低工资-人数">7.查询每种工作的最高工资、最低工资、人数</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT job,MAX(SAL),MIN(SAL),count(empno) </span><br><span class="line">from emp GROUP BY job;</span><br></pre></td></tr></table></figure>
+<h4 id="8列出薪金-高于-公司平均薪金的所有员工号员工姓名所在部门名称上级领导工资工资等级">8.列出薪金 高于 公司平均薪金的所有员工号，员工姓名，所在部门名称，上级领导，工资，工资等级</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT e.empno 员工号,e.ename 员工姓名,d.dname 部门名称,m.ename 上级领导,e.sal 工资,s.grade 工资等级</span><br><span class="line">from emp e </span><br><span class="line">LEFT JOIN dept d on e.deptno=d.deptno</span><br><span class="line">LEFT JOIN emp m on e.mgr=m.empno</span><br><span class="line">LEFT JOIN salgrade s on e.sal BETWEEN losal and hisal </span><br><span class="line">where (e.sal+ifnull(e.comm,0)) &gt; (select avg(e.sal+ifnull(e.comm,0)) from emp e);</span><br></pre></td></tr></table></figure>
+<p><strong>注意用自连接如：</strong><br>
+select m.ename 上级领导 from emp e join emp m on e.mgr=m.empno;</p>
+<h4 id="9列出薪金-高于-在部门30工作的-所有任何一个员工的薪金的员工姓名和薪金-部门名称">9.列出薪金  高于  在部门30工作的  所有/任何一个员工的薪金的员工姓名和薪金、部门名称。</h4>
+<p>解一(视图所有):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">drop view en;</span><br><span class="line">create view en </span><br><span class="line">as</span><br><span class="line">select ename,sal+IFNULL(comm,0) as esal,dname,dept.deptno </span><br><span class="line">from emp </span><br><span class="line">join dept on emp.deptno=dept.deptno;</span><br><span class="line"></span><br><span class="line">select * from en where esal&gt;(select max(esal) from en where deptno=30);</span><br></pre></td></tr></table></figure>
+<p>解一(所有):</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select * from (select ename,sal+IFNULL(comm,0) as esal,dname,dept.deptno from emp </span><br><span class="line">join dept on emp.deptno=dept.deptno) sn </span><br><span class="line">where sn.esal &gt;</span><br><span class="line">(select max(esal) from </span><br><span class="line">(select ename,sal+IFNULL(comm,0) as esal,deptno from emp ) as de </span><br><span class="line">where de.deptno=30);  </span><br><span class="line">-- 高于  在部门30工作的  所有等同于高于30部门最高工资</span><br></pre></td></tr></table></figure>
+<p>解二(所有):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from (select ename,sal+IFNULL(comm,0) as esal,dname,dept.deptno from emp </span><br><span class="line">join dept on emp.deptno=dept.deptno) sn where sn.esal &gt;</span><br><span class="line">ALL(select esal from </span><br><span class="line">(select ename,sal+IFNULL(comm,0) as esal,deptno from emp ) as de </span><br><span class="line">where de.deptno=30);</span><br></pre></td></tr></table></figure>
+<p>解一(任何):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from (select ename,sal+IFNULL(comm,0) as esal,dname,dept.deptno from emp </span><br><span class="line">join dept on emp.deptno=dept.deptno) sn where sn.esal &gt;</span><br><span class="line">(select min(esal) from </span><br><span class="line">(select ename,sal+IFNULL(comm,0) as esal,deptno from emp ) as de </span><br><span class="line">where de.deptno=30); -- 高于  在部门30工作的  任何等同于高于30部门最低工资</span><br></pre></td></tr></table></figure>
+<p>解二(任何):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from (select ename,sal+IFNULL(comm,0) as esal,dname,dept.deptno from emp </span><br><span class="line">join dept on emp.deptno=dept.deptno) sn where sn.esal &gt;</span><br><span class="line">ANY(select esal from </span><br><span class="line">(select ename,sal+IFNULL(comm,0) as esal,deptno from emp ) as de </span><br><span class="line">where de.deptno=30);</span><br></pre></td></tr></table></figure>
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/MySQL01/" data-toggle="tooltip" data-placement="top" title="MySQL01(安装部署)">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#创建表"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x8868;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-查询出部门编号为30的所有员工的编号和姓名"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">1. &#x67E5;&#x8BE2;&#x51FA;&#x90E8;&#x95E8;&#x7F16;&#x53F7;&#x4E3A;30&#x7684;&#x6240;&#x6709;&#x5458;&#x5DE5;&#x7684;&#x7F16;&#x53F7;&#x548C;&#x59D3;&#x540D;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2找出部门编号为10中所有经理和部门编号为20中所有销售员的详细资料"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">2.&#x627E;&#x51FA;&#x90E8;&#x95E8;&#x7F16;&#x53F7;&#x4E3A;10&#x4E2D;&#x6240;&#x6709;&#x7ECF;&#x7406;&#xFF0C;&#x548C;&#x90E8;&#x95E8;&#x7F16;&#x53F7;&#x4E3A;20&#x4E2D;&#x6240;&#x6709;&#x9500;&#x552E;&#x5458;&#x7684;&#x8BE6;&#x7EC6;&#x8D44;&#x6599;&#x3002;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3查询所有员工详细信息用工资降序排序如果工资相同使用入职日期升序排序"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">3.&#x67E5;&#x8BE2;&#x6240;&#x6709;&#x5458;&#x5DE5;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#xFF0C;&#x7528;&#x5DE5;&#x8D44;&#x964D;&#x5E8F;&#x6392;&#x5E8F;&#xFF0C;&#x5982;&#x679C;&#x5DE5;&#x8D44;&#x76F8;&#x540C;&#x4F7F;&#x7528;&#x5165;&#x804C;&#x65E5;&#x671F;&#x5347;&#x5E8F;&#x6392;&#x5E8F;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4列出薪金大于1500的各种工作及从事此工作的员工人数"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">4.&#x5217;&#x51FA;&#x85AA;&#x91D1;&#x5927;&#x4E8E;1500&#x7684;&#x5404;&#x79CD;&#x5DE5;&#x4F5C;&#x53CA;&#x4ECE;&#x4E8B;&#x6B64;&#x5DE5;&#x4F5C;&#x7684;&#x5458;&#x5DE5;&#x4EBA;&#x6570;&#x3002;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#5列出在销售部工作的员工的姓名假定不知道销售部的部门编号"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">5.&#x5217;&#x51FA;&#x5728;&#x9500;&#x552E;&#x90E8;&#x5DE5;&#x4F5C;&#x7684;&#x5458;&#x5DE5;&#x7684;&#x59D3;&#x540D;&#xFF0C;&#x5047;&#x5B9A;&#x4E0D;&#x77E5;&#x9053;&#x9500;&#x552E;&#x90E8;&#x7684;&#x90E8;&#x95E8;&#x7F16;&#x53F7;&#x3002;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#6查询姓名以s开头的以s结尾包含s字符第二个字母为l"><span class="toc-nav-number">7.</span> <span class="toc-nav-text">6.&#x67E5;&#x8BE2;&#x59D3;&#x540D;&#x4EE5;S&#x5F00;&#x5934;&#x7684;\&#x4EE5;S&#x7ED3;&#x5C3E;\&#x5305;&#x542B;S&#x5B57;&#x7B26;\&#x7B2C;&#x4E8C;&#x4E2A;&#x5B57;&#x6BCD;&#x4E3A;L</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#7查询每种工作的最高工资-最低工资-人数"><span class="toc-nav-number">8.</span> <span class="toc-nav-text">7.&#x67E5;&#x8BE2;&#x6BCF;&#x79CD;&#x5DE5;&#x4F5C;&#x7684;&#x6700;&#x9AD8;&#x5DE5;&#x8D44;&#x3001;&#x6700;&#x4F4E;&#x5DE5;&#x8D44;&#x3001;&#x4EBA;&#x6570;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#8列出薪金-高于-公司平均薪金的所有员工号员工姓名所在部门名称上级领导工资工资等级"><span class="toc-nav-number">9.</span> <span class="toc-nav-text">8.&#x5217;&#x51FA;&#x85AA;&#x91D1; &#x9AD8;&#x4E8E; &#x516C;&#x53F8;&#x5E73;&#x5747;&#x85AA;&#x91D1;&#x7684;&#x6240;&#x6709;&#x5458;&#x5DE5;&#x53F7;&#xFF0C;&#x5458;&#x5DE5;&#x59D3;&#x540D;&#xFF0C;&#x6240;&#x5728;&#x90E8;&#x95E8;&#x540D;&#x79F0;&#xFF0C;&#x4E0A;&#x7EA7;&#x9886;&#x5BFC;&#xFF0C;&#x5DE5;&#x8D44;&#xFF0C;&#x5DE5;&#x8D44;&#x7B49;&#x7EA7;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#9列出薪金-高于-在部门30工作的-所有任何一个员工的薪金的员工姓名和薪金-部门名称"><span class="toc-nav-number">10.</span> <span class="toc-nav-text">9.&#x5217;&#x51FA;&#x85AA;&#x91D1;  &#x9AD8;&#x4E8E;  &#x5728;&#x90E8;&#x95E8;30&#x5DE5;&#x4F5C;&#x7684;  &#x6240;&#x6709;/&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x5458;&#x5DE5;&#x7684;&#x85AA;&#x91D1;&#x7684;&#x5458;&#x5DE5;&#x59D3;&#x540D;&#x548C;&#x85AA;&#x91D1;&#x3001;&#x90E8;&#x95E8;&#x540D;&#x79F0;&#x3002;</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#MySQL-execises" title="MySQL-execises">MySQL-execises</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/tracey-c/tracey-c.github.io" target="_blank">tracey友链</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'rz'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<!-- chrome Firefox 中文锚点定位失效-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- smooth scroll behavior polyfill  -->
+<script type="text/javascript" src="/js/smoothscroll.js"></script>
+<script>
+        $('#toc').on('click','a',function(a){
+            // var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+            // console.log(window.navigator.userAgent,isChrome)
+                // if(isChrome) {
+                    // console.log(a.currentTarget.outerHTML);
+                    // console.log($(a.currentTarget).attr("href"));
+                    //跳转到指定锚点
+                    // document.getElementById(a.target.innerText.toLowerCase()).scrollIntoView(true);
+                    document.getElementById($(a.currentTarget).attr("href").replace("#","")).scrollIntoView({behavior: 'smooth' });
+                // }
+        })  
+</script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/tracey-c">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tracey 2020
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    re-Ported by <a href="http://tracey-c.github.io">tracey</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=tracey-c&repo=tracey-c.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
