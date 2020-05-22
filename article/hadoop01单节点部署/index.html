@@ -146,13 +146,6 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -161,6 +154,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -275,7 +275,7 @@ etc/hadoop/hdfs-site.xml</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop01 hadoop]$ sbin/start-dfs.sh</span><br><span class="line">19/10/06 22:43:08 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">Starting namenodes on [hadoop01]</span><br><span class="line">hadoop01: starting namenode, logging to /home/hadoop/app/hadoop-2.6.0-cdh5.16.2/logs/hadoop-hadoop-namenode-hadoop01.out</span><br><span class="line">hadoop01: starting datanode, logging to /home/hadoop/app/hadoop-2.6.0-cdh5.16.2/logs/hadoop-hadoop-datanode-hadoop01.out</span><br><span class="line">Starting secondary namenodes [hadoop01]</span><br><span class="line">hadoop01: starting secondarynamenode, logging to /home/hadoop/app/hadoop-2.6.0-cdh5.16.2/logs/hadoop-hadoop-secondarynamenode-hadoop01.out</span><br><span class="line">20/05/06 22:43:23 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">[hadoop@hadoop01 hadoop]$ jps</span><br><span class="line">21712 DataNode    #dn 存储数据的  小弟</span><br><span class="line">21583 NameNode    #nn 负责分配数据存储的 老大</span><br><span class="line">21871 SecondaryNameNode  #snn 万年老二 默认是按1小时粒度去备份老大的数据</span><br><span class="line">21929 Jps</span><br></pre></td></tr></table></figure>
 <h6 id="19-open-web">1.9 open web：</h6>
 <p>通过pid找web端口号<br>
-netstat npl | grep 21583     #grep 进程号<br>
+netstat nlp | grep 21583     #grep 进程号<br>
 <a href="http://ip" target="_blank" rel="noopener">http://ip</a>:port<br>
 如：<a href="http://192.168.127.204:50070/dfshealth.html#tab-overview" target="_blank" rel="noopener">http://192.168.127.204:50070/dfshealth.html#tab-overview</a>  #可以打开说明hdfs组件配置成功</p>
 <p><strong>以下测试操作非必须执行步骤</strong></p>
