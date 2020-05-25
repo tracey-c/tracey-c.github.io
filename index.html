@@ -138,6 +138,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archive/">Archives</a>
                         </li>
                         
@@ -146,13 +153,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -385,6 +385,73 @@ ls ......
 
 <div class="post-preview">
 
+    <a href="/article/HDFS写流程/">
+        <h2 class="post-title">
+                                 
+            HDFS写流程
+        </h2>
+        <h3 class="post-subtitle">
+            This is HDFS read theme.
+        </h3>
+        <div class="post-content-preview">
+            HDFS读流程如下图
+
+1.HDFS Client调用FileSystem.create(filePath)方法，去和NN进行【RPC】通信！
+NN 会去check这个路径的文件是否已经存在，是否有权限能够创建这个文件！
+假如都ok，就去创建一个新的文件，但是这时还没写数据，是不关联任何的block。
+nn根据上传的文件大小，根据块大小+副本数参数，计算要上传多少块和块存储在DN的位置。最终......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by tracey on
+            2019-08-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#HDFS写流程" title="HDFS写流程">HDFS写流程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/HDFS读流程/">
+        <h2 class="post-title">
+                                 
+            HDFS读流程
+        </h2>
+        <h3 class="post-subtitle">
+            This is HDFS read theme.
+        </h3>
+        <div class="post-content-preview">
+            HDFS读流程如下图
+
+1.Client调用FileSystem的open(filePath),与NN进行RPC通信，返回该文件的部分或者全部的block列表也就是返回【FSDataInputStream】对象。
+2.Client调用【FSDataInputStream】对象的read方法,去与第一个块的最近的DN进行读取，读取完成后，会check，假如ok，就关闭与DN通信。
+假如读取失败......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by tracey on
+            2019-08-13
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#HDFS读流程" title="HDFS读流程">HDFS读流程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/article/hadoop01单节点部署/">
         <h2 class="post-title">
                                  
@@ -518,11 +585,27 @@ jdk需安装(mysql部署时已安装）
     <div class="tags">
         
             
+            <a href="/tags/#HDFS读流程" title="HDFS读流程" rel="1">HDFS读流程</a>
+            
+        
+            
+            <a href="/tags/#HDFS写流程" title="HDFS写流程" rel="1">HDFS写流程</a>
+            
+        
+            
+            <a href="/tags/#MySQL-execises" title="MySQL-execises" rel="1">MySQL-execises</a>
+            
+        
+            
             <a href="/tags/#MySQL01" title="MySQL01" rel="1">MySQL01</a>
             
         
             
             <a href="/tags/#Hadoop01部署" title="Hadoop01部署" rel="1">Hadoop01部署</a>
+            
+        
+            
+            <a href="/tags/#Linux01" title="Linux01" rel="1">Linux01</a>
             
         
             
@@ -535,14 +618,6 @@ jdk需安装(mysql部署时已安装）
         
             
             <a href="/tags/#Linux04" title="Linux04" rel="1">Linux04</a>
-            
-        
-            
-            <a href="/tags/#Linux01" title="Linux01" rel="1">Linux01</a>
-            
-        
-            
-            <a href="/tags/#MySQL-execises" title="MySQL-execises" rel="1">MySQL-execises</a>
             
         
     </div>
@@ -596,6 +671,14 @@ jdk需安装(mysql部署时已安装）
     <ul>
       
         <li>
+          <a href="/article/HDFS写流程/">HDFS写流程</a>
+        </li>
+      
+        <li>
+          <a href="/article/HDFS读流程/">HDFS读流程</a>
+        </li>
+      
+        <li>
           <a href="/article/hadoop01单节点部署/">hadoop01单节点部署(基于CDH5.16.2)</a>
         </li>
       
@@ -605,14 +688,6 @@ jdk需安装(mysql部署时已安装）
       
         <li>
           <a href="/article/MySQL01/">MySQL01(安装部署)</a>
-        </li>
-      
-        <li>
-          <a href="/article/linux03命令/">Linux03命令</a>
-        </li>
-      
-        <li>
-          <a href="/article/linux04命令/">Linux04命令</a>
         </li>
       
     </ul>
@@ -635,7 +710,7 @@ jdk需安装(mysql部署时已安装）
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>
