@@ -260,6 +260,30 @@
     sidebar-container
 ">
     
+        
+<!--
+<h5>SEARCH</h5>
+<div class="search-article" class="tags">
+	<input id="search-kw" type="text" name="search_article" placeholder="Enter keywords for search" />
+	<div class="search-img">
+		<img 
+			src="/img/search.png" 
+			alt="search" 
+			onMouseOver="this.src='/img/search-focus.png'" 
+			onMouseOut="this.src='/img/search.png'"/>
+	</div>
+</div>-->
+
+<h5>SEARCH</h5>
+<div id="site_search">
+	<div class="form-group">
+		<input type="text" id="local-search-input" name="q" results="0" placeholder="search" class="st-search-input st-default-search-input form-control"/>
+	</div>  
+	<div id="local-search-result"></div>
+</div>
+
+        <hr>
+    
         <!-- Featured Tags -->
 
 <section>
@@ -268,15 +292,11 @@
     <div class="tags">
         
             
-            <a href="/tags/#HDFS读流程" title="HDFS读流程" rel="1">HDFS读流程</a>
-            
-        
-            
             <a href="/tags/#HDFS写流程" title="HDFS写流程" rel="1">HDFS写流程</a>
             
         
             
-            <a href="/tags/#MySQL-execises" title="MySQL-execises" rel="1">MySQL-execises</a>
+            <a href="/tags/#HDFS读流程" title="HDFS读流程" rel="1">HDFS读流程</a>
             
         
             
@@ -288,15 +308,19 @@
             
         
             
+            <a href="/tags/#MySQL-execises" title="MySQL-execises" rel="1">MySQL-execises</a>
+            
+        
+            
             <a href="/tags/#Linux01" title="Linux01" rel="1">Linux01</a>
             
         
             
-            <a href="/tags/#Linux02" title="Linux02" rel="1">Linux02</a>
+            <a href="/tags/#Linux03" title="Linux03" rel="1">Linux03</a>
             
         
             
-            <a href="/tags/#Linux03" title="Linux03" rel="1">Linux03</a>
+            <a href="/tags/#Linux02" title="Linux02" rel="1">Linux02</a>
             
         
             
@@ -458,6 +482,8 @@
 <!-- Custom Theme JavaScript -->
 <script src="/js/hux-blog.min.js"></script>
 
+<!-- Search -->
+<script src="/js/search.js"></script>
 
 <!-- async load function -->
 <script>
