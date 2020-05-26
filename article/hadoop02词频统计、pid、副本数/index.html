@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          hadoop02词频统计、pid、副本 - tracey | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/article/hadoop02词频统计、pid、副本数/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/undefined');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#hadoop02词频统计、pid、副本" title="hadoop02词频统计、pid、副本">hadoop02词频统计、pid、副本</a>
+                            
+                        </div>
+                        <h1>hadoop02词频统计、pid、副本</h1>
+                        <h2 class="subheading">This is hadoop theme.</h2>
+                        <span class="meta">
+                            Posted by tracey on
+                            2019-09-10
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">tracey</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="1词频统计">1.词频统计</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop01 data]$ hdfs dfs -mkdir  /wordcount2</span><br><span class="line">19/10/09 21:33:45 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">[hadoop@hadoop01 data]$ </span><br><span class="line">[hadoop@hadoop01 data]$ hdfs dfs -mkdir  /wordcount2/input/</span><br><span class="line">19/10/09 21:33:51 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">[hadoop@hadoop01 data]$ hdfs dfs -put * /wordcount2/input/</span><br><span class="line">19/10/09 21:34:03 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop01 data]$ hdfs dfs -ls  /wordcount2/input/</span><br><span class="line">19/10/09 21:34:46 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">Found 2 items</span><br><span class="line">-rw-r--r--   1 hadoop supergroup         35 2019-10-09 21:34 /wordcount2/input/1.log</span><br><span class="line">-rw-r--r--   1 hadoop supergroup         29 2019-10-09 21:34 /wordcount2/input/2.log</span><br><span class="line">[hadoop@hadoop01 data]$ </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[hadoop@hadoop01 hadoop]$ hadoop jar \</span><br><span class="line">./share/hadoop/mapreduce2/hadoop-mapreduce-examples-2.6.0-cdh5.16.2.jar  \</span><br><span class="line">wordcount /wordcount2/input/ /wordcount2/output1/</span><br><span class="line"></span><br><span class="line">19/10/09 21:38:08 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">19/10/09 21:38:08 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032</span><br><span class="line">19/10/09 21:38:09 INFO input.FileInputFormat: Total input paths to process : 2</span><br><span class="line"></span><br><span class="line">19/10/09 21:38:10 INFO mapreduce.JobSubmitter: number of splits:2</span><br><span class="line">#思考: mapreduce的split=map的个数 是什么影响的</span><br><span class="line">MapReduce作业map任务的个数是根据输入文件的分片（split）个数决定的，一个split对应一个map任务。</span><br><span class="line">控制 map 数量：  </span><br><span class="line">新版本 mapreduce 的 textInputFormat 使用参数： </span><br><span class="line">mapreduce.input.fileinputformat.split.maxsize和			mapreduce.input.fileinputformat.split.minsize </span><br><span class="line">来控制 split 也就是 map 的数量  </span><br><span class="line">公式：split_size = max(minsize,min(maxsize,blocksize)) 默认 spilt_size=blocksize   </span><br><span class="line">	默认 maxsize 为 Long.MaxValue,minsize 为 0，所以默认 map 大小等于 blocksize， 也就是 128M  </span><br><span class="line">	如果要增多 map 数量，就将 maxsize 的值设置比 blocksize 小  </span><br><span class="line">	如果要减少 map 数量，就将 minsize 的值设置比 blocksize 大 </span><br><span class="line"></span><br><span class="line">19/10/09 21:38:10 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1589030910472_0001</span><br><span class="line">19/10/09 21:38:10 INFO impl.YarnClientImpl: Submitted application application_1589030910472_0001</span><br><span class="line">19/10/09 21:38:10 INFO mapreduce.Job: The url to track the job: http://hadoop01:18088/proxy/application_1589030910472_0001/</span><br><span class="line">19/10/09 21:38:10 INFO mapreduce.Job: Running job: job_1589030910572_0001</span><br><span class="line">19/10/09 21:38:17 INFO mapreduce.Job: Job job_1589030910472_0001 running in uber mode : false</span><br><span class="line">19/10/09 21:38:17 INFO mapreduce.Job:  map 0% reduce 0%</span><br><span class="line">19/10/09 21:38:22 INFO mapreduce.Job:  map 50% reduce 0%</span><br><span class="line">19/10/09 21:38:23 INFO mapreduce.Job:  map 100% reduce 0%</span><br><span class="line">19/10/09 21:38:28 INFO mapreduce.Job:  map 100% reduce 100%</span><br><span class="line">19/10/09 21:38:28 INFO mapreduce.Job: Job job_1589030910472_0001 completed successfully</span><br><span class="line">19/10/09 21:38:28 INFO mapreduce.Job: Counters: 49</span><br><span class="line">        File System Counters</span><br><span class="line">                FILE: Number of bytes read=116</span><br><span class="line">                FILE: Number of bytes written=429291</span><br><span class="line">                FILE: Number of read operations=0</span><br><span class="line">                FILE: Number of large read operations=0</span><br><span class="line">                FILE: Number of write operations=0</span><br><span class="line">                HDFS: Number of bytes read=288</span><br><span class="line">                HDFS: Number of bytes written=41</span><br><span class="line">                HDFS: Number of read operations=9</span><br><span class="line">                HDFS: Number of large read operations=0</span><br><span class="line">                HDFS: Number of write operations=2</span><br><span class="line">        Job Counters </span><br><span class="line">                Launched map tasks=2</span><br><span class="line">                Launched reduce tasks=1</span><br><span class="line">                Data-local map tasks=2</span><br><span class="line">                Total time spent by all maps in occupied slots (ms)=6455</span><br><span class="line">                Total time spent by all reduces in occupied slots (ms)=2812</span><br><span class="line">                Total time spent by all map tasks (ms)=6455</span><br><span class="line">                Total time spent by all reduce tasks (ms)=2812</span><br><span class="line">                Total vcore-milliseconds taken by all map tasks=6455</span><br><span class="line">                Total vcore-milliseconds taken by all reduce tasks=2812</span><br><span class="line">                Total megabyte-milliseconds taken by all map tasks=6609919</span><br><span class="line">                Total megabyte-milliseconds taken by all reduce tasks=2879488</span><br><span class="line">        Map-Reduce Framework</span><br><span class="line">                Map input records=7</span><br><span class="line">                Map output records=16</span><br><span class="line">                Map output bytes=127</span><br><span class="line">                Map output materialized bytes=122</span><br><span class="line">                Input split bytes=224</span><br><span class="line">                Combine input records=16</span><br><span class="line">                Combine output records=11</span><br><span class="line">                Reduce input groups=7</span><br><span class="line">                Reduce shuffle bytes=122</span><br><span class="line">                Reduce input records=11</span><br><span class="line">                Reduce output records=7</span><br><span class="line">                Spilled Records=22</span><br><span class="line">                Shuffled Maps =2</span><br><span class="line">                Failed Shuffles=0</span><br><span class="line">                Merged Map outputs=2</span><br><span class="line">                GC time elapsed (ms)=170</span><br><span class="line">                CPU time spent (ms)=1350</span><br><span class="line">                Physical memory (bytes) snapshot=781856768</span><br><span class="line">                Virtual memory (bytes) snapshot=8315179008</span><br><span class="line">                Total committed heap usage (bytes)=770179072</span><br><span class="line">        Shuffle Errors</span><br><span class="line">                BAD_ID=0</span><br><span class="line">                CONNECTION=0</span><br><span class="line">                IO_ERROR=0</span><br><span class="line">                WRONG_LENGTH=0</span><br><span class="line">                WRONG_MAP=0</span><br><span class="line">                WRONG_REDUCE=0</span><br><span class="line">        File Input Format Counters </span><br><span class="line">                Bytes Read=64</span><br><span class="line">        File Output Format Counters </span><br><span class="line">                Bytes Written=41</span><br><span class="line">[hadoop@hadoop01 hadoop]$ </span><br><span class="line"></span><br><span class="line">[hadoop@hadoop01 hadoop]$ hdfs dfs -ls /wordcount2/output1/</span><br><span class="line">19/10/09 21:41:08 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable</span><br><span class="line">Found 2 items</span><br><span class="line">-rw-r--r--   1 hadoop supergroup          0 2019-10-09 21:38 /wordcount2/output1/_SUCCESS</span><br><span class="line">-rw-r--r--   1 hadoop supergroup         41 2019-10-09 21:38 /wordcount2/output1/part-r-00000</span><br><span class="line">[hadoop@hadoop01 hadoop]$ </span><br><span class="line"></span><br><span class="line">#思考:mapreduce跑完结束，文件的个数=reduce由什么决定，当前是1</span><br><span class="line">part-r-00000</span><br><span class="line">reduce个数受partition影响，一个partition对应一个reduce输入</span><br><span class="line"></span><br><span class="line">[hadoop@hadoop01 hadoop]$ cat part-r-00000</span><br><span class="line">a       4</span><br><span class="line">ab      1</span><br><span class="line">b       1</span><br><span class="line">hive    3</span><br><span class="line">data    1</span><br><span class="line">jacket  2</span><br><span class="line">hadoop  3</span><br></pre></td></tr></table></figure>
+<h4 id="2jps命令">2.jps命令</h4>
+<h6 id="21-位置">2.1 位置</h6>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop01 hadoop]$ which jps</span><br><span class="line">/usr/java/jdk1.8.0_181/bin/jps</span><br></pre></td></tr></table></figure>
+<h6 id="22-使用">2.2 使用</h6>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop01 hadoop]$ jps</span><br><span class="line">21712 DataNode</span><br><span class="line">21585 NameNode</span><br><span class="line">23989 ResourceManager</span><br><span class="line">29877 Jps</span><br><span class="line">24094 NodeManager</span><br><span class="line">21871 SecondaryNameNode</span><br></pre></td></tr></table></figure>
+<h6 id="23-对应的进程标识文件存储在哪">2.3 对应的进程标识文件存储在哪</h6>
+<p>/tmp/hsperfdata_hadoop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@hadoop01 tmp]$ cd hsperfdata_hadoop</span><br><span class="line">[hadoop@hadoop01 hsperfdata_hadoop]$ ll</span><br><span class="line">total 160</span><br><span class="line">-rw------- 1 hadoop hadoop 32768 May  9 22:01 21585</span><br><span class="line">-rw------- 1 hadoop hadoop 32768 May  9 22:01 21712</span><br><span class="line">-rw------- 1 hadoop hadoop 32768 May  9 22:01 21871</span><br><span class="line">-rw------- 1 hadoop hadoop 32768 May  9 22:01 23989</span><br><span class="line">-rw------- 1 hadoop hadoop 32768 May  9 22:01 24094</span><br><span class="line">[hadoop@hadoop01 hsperfdata_hadoop]$ mv 21712 21712.bak  #mv同个目录备份再移回会丢失 移动其他目录没问题如：mv 21712 /tmp/</span><br><span class="line">[hadoop@hadoop01 hsperfdata_hadoop]$ </span><br><span class="line">[hadoop@hadoop01 hsperfdata_hadoop]$ ps -ef|grep DataNode</span><br><span class="line">hadoop   21712     1  0 May06 ?        00:03:54 /usr/java/jdk1.8.0_181/bin/java \</span><br><span class="line">-Dproc_datanode -Xmx1000m \</span><br><span class="line">-Djava.net.preferIPv4Stack=true \</span><br><span class="line">-Dhadoop.log.dir=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2/logs </span><br><span class="line">-Dhadoop.log.file=hadoop.log \</span><br><span class="line">-Dhadoop.home.dir=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2 \</span><br><span class="line">-Dhadoop.id.str=hadoop \</span><br><span class="line">-Dhadoop.root.logger=INFO,console \</span><br><span class="line">-Djava.library.path=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2/lib/native \</span><br><span class="line">-Dhadoop.policy.file=hadoop-policy.xml \</span><br><span class="line">-Djava.net.preferIPv4Stack=true \</span><br><span class="line">-Djava.net.preferIPv4Stack=true \</span><br><span class="line">-Djava.net.preferIPv4Stack=true \</span><br><span class="line">-Dhadoop.log.dir=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2/logs </span><br><span class="line">-Dhadoop.log.file=hadoop-hadoop-datanode-hadoop01.log </span><br><span class="line">-Dhadoop.home.dir=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2 \</span><br><span class="line">-Dhadoop.id.str=hadoop \</span><br><span class="line">-Dhadoop.root.logger=INFO,RFA \</span><br><span class="line">-Djava.library.path=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2/lib/native \</span><br><span class="line">-Dhadoop.policy.file=hadoop-policy.xml \</span><br><span class="line">-Djava.net.preferIPv4Stack=true -server \</span><br><span class="line">-Dhadoop.security.logger=ERROR,RFAS \</span><br><span class="line">-Dhadoop.security.logger=ERROR,RFAS \</span><br><span class="line">-Dhadoop.security.logger=ERROR,RFAS \</span><br><span class="line">-Dhadoop.security.logger=INFO,RFAS org.apache.hadoop.hdfs.server.datanode.DataNode</span><br><span class="line">hadoop   30469 30251  0 22:03 pts/1    00:00:00 grep --color=auto DataNode</span><br><span class="line">[hadoop@hadoop01 hsperfdata_hadoop]$ </span><br><span class="line"></span><br><span class="line">[hadoop@hadoop01 hadoop]$ jps</span><br><span class="line">21585 NameNode</span><br><span class="line">23989 ResourceManager</span><br><span class="line">30358 Jps</span><br><span class="line">24094 NodeManager</span><br><span class="line">21871 SecondaryNameNode</span><br><span class="line">[hadoop@hadoop01 hadoop]$</span><br></pre></td></tr></table></figure>
+<h6 id="24-当出现-process-information-unavailable">2.4 当出现 – process information unavailable</h6>
+<p>进程不能代表是存在 或者 不存在，要当心，尤其是使用jps检测状态的<br>
+ps -ef | grep xxx 命令是去查看进程的真正手段！！！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop01 ~]# jps</span><br><span class="line">21712 -- process information unavailable</span><br><span class="line">31713 Jps</span><br><span class="line">23989 -- process information unavailable</span><br><span class="line">24094 NodeManager</span><br><span class="line">[root@hadoop01 ~]# ps -ef |grep 23989</span><br><span class="line">root     31791 31644  0 22:11 pts/2    00:00:00 grep --color=auto 23989 #进程不存在</span><br><span class="line">[root@hadoop01 ~]# ps -ef |grep 21712</span><br><span class="line">hadoop   21712     1  0 May06 ?        00:03:54 /usr/java/jdk1.8.0_181/bin/java -Dproc_datanode -Xmx1000m -Djava.net.preferIPv4Stack=true -Dhadoop.log.dir=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2/logs -Dhadoop.log.file=hadoop.log -Dhadoop.home.dir=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2 -Dhadoop.id.str=hadoop -Dhadoop.root.logger=INFO,console -Djava.library.path=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2/lib/native -Dhadoop.policy.file=hadoop-policy.xml -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Stack=true -Dhadoop.log.dir=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2/logs -Dhadoop.log.file=hadoop-hadoop-datanode-hadoop01.log -Dhadoop.home.dir=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2 -Dhadoop.id.str=hadoop -Dhadoop.root.logger=INFO,RFA -Djava.library.path=/home/hadoop/app/hadoop-2.6.0-cdh5.16.2/lib/native -Dhadoop.policy.file=hadoop-policy.xml -Djava.net.preferIPv4Stack=true -server -Dhadoop.security.logger=ERROR,RFAS -Dhadoop.security.logger=ERROR,RFAS -Dhadoop.security.logger=ERROR,RFAS -Dhadoop.security.logger=INFO,RFAS org.apache.hadoop.hdfs.server.datanode.DataNode</span><br><span class="line">root     31812 31644  0 22:11 pts/2    00:00:00 grep --color=auto 21712 #进程存在</span><br><span class="line">[root@hadoop01 ~]#</span><br></pre></td></tr></table></figure>
+<h6 id="25-文件被删除不影响进程的重启">2.5 文件被删除，不影响进程的重启！！</h6>
+<p>/tmp/hsperfdata_hadoop 目录下去清理<br>
+21712 – process information unavailable<br>
+重新启动 sbin/start-all.sh 不影响进程的重启</p>
+<h4 id="3pid文件">3.pid文件</h4>
+<h6 id="31-pid存储位置">3.1 pid存储位置</h6>
+<p>默认存储在/tmp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop01 tmp]# ll</span><br><span class="line">total 19</span><br><span class="line">-rw-rw-r-- 1 hadoop hadoop   4 Oct  9 22:16 hadoop-hadoop-datanode.pid</span><br><span class="line">-rw-rw-r-- 1 hadoop hadoop   4 Oct  9 22:16 hadoop-hadoop-namenode.pid</span><br><span class="line">-rw-rw-r-- 1 hadoop hadoop   5 Oct  9 22:16 hadoop-hadoop-secondarynamenode.pid</span><br></pre></td></tr></table></figure>
+<h6 id="32-维护进程的pid-写死的">3.2 维护进程的pid 写死的</h6>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@hadoop01 tmp]# cat hadoop-hadoop-namenode.pid</span><br><span class="line">792</span><br><span class="line">[root@hadoop01 tmp]#</span><br></pre></td></tr></table></figure>
+<h6 id="33-文件被删除影响进程的重启">3.3 文件被删除，影响进程的重启！！</h6>
+<p>进程启动，pid文件写入进程的pid数字<br>
+进程关闭时，从pid文件读出pid数字，然后kill -9 pid</p>
+<h6 id="34-生产上pid存放">3.4 生产上pid存放</h6>
+<p>生产场景 pid文件真的可以放心的丢在/tmp维护吗？<br>
+Linux的/tmp 会有30天的默认删除机制</p>
+<h6 id="35-如何修改">3.5 如何修改</h6>
+<p>修改hadoop-env.sh脚本<br>
+ export HAOOOP_PID_DIR=/home/hadoop/tmp/  #路径自定义写死防止丢失<br>
+修改后<br>
+[hadoop@hadoop01 hadoop]$ kill -9 $(pgrep -f hadoop)   #所有进程杀死<br>
+[hadoop@hadoop01 hadoop]$ ps -ef | grep hadoop #check一下进程<br>
+[hadoop@hadoop01 hadoop]$ pwd<br>
+/home/hadoop/app/hadoop/etc/hadoop</p>
+<p>重启进程sbin/start-all.sh查看是在/home/hadoop/tmp/ 下<br>
+总结：<br>
+  pid文件生产不要丢在/tmp目录<br>
+  要知道是影响进程的启动停止</p>
+<h4 id="4块-block">4.块 block</h4>
+<h6 id="41块的概念">4.1块的概念</h6>
+<p>eg:一缸水 260ml<br>
+瓶子 规格 128ml</p>
+<p>260/128=2…4ml<br>
+128ml<br>
+128ml<br>
+4ml<br>
+三个瓶子</p>
+<p>HDFS 存储大文件是利好，存储小文件是损害自己的<br>
+适合存储大文件 不适合小文件，不代表不能存储小文件</p>
+<p>mv  260m文件<br>
+上传到hdfs,会把文件切割成块 dfs.blocksize 134217728 =128M<br>
+128m<br>
+128m<br>
+4m</p>
+<p>3个块</p>
+<h6 id="42设置-副本数">4.2设置 副本数</h6>
+<p>伪分布式节点 1节点 副本数 dfs.replication 1<br>
+生产上HDFS集群的 DN肯定大于&gt;=3台   dfs.replication=3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DN1          DN2   DN5  DN10</span><br><span class="line">128m b1            b1   b1</span><br><span class="line">128m b2      b2         b2</span><br><span class="line">4m           b3    b3   b3</span><br></pre></td></tr></table></figure>
+<p>通过设置副本数 来让文件存储在大数据HDFS平台上有容错保障</p>
+<h6 id="43-block大小为什么由64m128m">4.3 block大小为什么由64M–》128M</h6>
+<p>mv  260m文件<br>
+260/64=4…4M<br>
+b1 64m<br>
+b2 64m<br>
+b3 64m<br>
+b4 64m<br>
+b5 4m<br>
+5个块</p>
+<p>260/128=2…4M<br>
+128m<br>
+128m<br>
+4m<br>
+3个块</p>
+<p>副本数3：存储实际大小=文件大小<em>3=260</em>3=780m 存储空间</p>
+<p>5个块的元数据信息维护 是不是 比3个块的元数据的信息维护要多，<br>
+维护重  累–》namenode<br>
+所以nn是不喜欢 小文件的</p>
+<p>1亿个10kb文件  3亿个block<br>
+1亿个10kb文件压缩成1KW个文件100m   3KW的block</p>
+<h6 id="44-如何规避-小文件">4.4 如何规避 小文件</h6>
+<p>1）数据传输到hdfs之前就合并<br>
+2）数据已经在hdfs上，就是定时  业务低谷的 去合并冷文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">      /2019/10/10</span><br><span class="line">/2019/10/11</span><br><span class="line">/2019/10/12  当前时间</span><br></pre></td></tr></table></figure>
+<p>生产上需要定时合并七天前数据</p>
+<p>19号 14号的文件<br>
+21号 15号的文件<br>
+一天卡一天</p>
+<p>经验值<br>
+10m以下的文件 小文件<br>
+合并到120m文件接近blocksize大小128m（有些数据文件不可切割的）<br>
+128m  真正合并就超了 变为129m–》2个块  128m  1m<br>
+会对namenode较大压力<br>
+10m 10m 10m …10m 12个=119m<br>
+10m 10m 10m …10m 13个=130m<br>
+合并 119m文件</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/HDFS副本放置策略/" data-toggle="tooltip" data-placement="top" title="HDFS副本放置策略">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/HDFS写流程/" data-toggle="tooltip" data-placement="top" title="HDFS写流程">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1词频统计"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1.&#x8BCD;&#x9891;&#x7EDF;&#x8BA1;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#2jps命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2.jps&#x547D;&#x4EE4;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#21-位置"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">2.1 &#x4F4D;&#x7F6E;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#22-使用"><span class="toc-nav-number">2.0.2.</span> <span class="toc-nav-text">2.2 &#x4F7F;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#23-对应的进程标识文件存储在哪"><span class="toc-nav-number">2.0.3.</span> <span class="toc-nav-text">2.3 &#x5BF9;&#x5E94;&#x7684;&#x8FDB;&#x7A0B;&#x6807;&#x8BC6;&#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x5728;&#x54EA;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#24-当出现-process-information-unavailable"><span class="toc-nav-number">2.0.4.</span> <span class="toc-nav-text">2.4 &#x5F53;&#x51FA;&#x73B0; &#x2013; process information unavailable</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#25-文件被删除不影响进程的重启"><span class="toc-nav-number">2.0.5.</span> <span class="toc-nav-text">2.5 &#x6587;&#x4EF6;&#x88AB;&#x5220;&#x9664;&#xFF0C;&#x4E0D;&#x5F71;&#x54CD;&#x8FDB;&#x7A0B;&#x7684;&#x91CD;&#x542F;&#xFF01;&#xFF01;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#3pid文件"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3.pid&#x6587;&#x4EF6;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#31-pid存储位置"><span class="toc-nav-number">3.0.1.</span> <span class="toc-nav-text">3.1 pid&#x5B58;&#x50A8;&#x4F4D;&#x7F6E;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#32-维护进程的pid-写死的"><span class="toc-nav-number">3.0.2.</span> <span class="toc-nav-text">3.2 &#x7EF4;&#x62A4;&#x8FDB;&#x7A0B;&#x7684;pid &#x5199;&#x6B7B;&#x7684;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#33-文件被删除影响进程的重启"><span class="toc-nav-number">3.0.3.</span> <span class="toc-nav-text">3.3 &#x6587;&#x4EF6;&#x88AB;&#x5220;&#x9664;&#xFF0C;&#x5F71;&#x54CD;&#x8FDB;&#x7A0B;&#x7684;&#x91CD;&#x542F;&#xFF01;&#xFF01;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#34-生产上pid存放"><span class="toc-nav-number">3.0.4.</span> <span class="toc-nav-text">3.4 &#x751F;&#x4EA7;&#x4E0A;pid&#x5B58;&#x653E;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#35-如何修改"><span class="toc-nav-number">3.0.5.</span> <span class="toc-nav-text">3.5 &#x5982;&#x4F55;&#x4FEE;&#x6539;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#4块-block"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4.&#x5757; block</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#41块的概念"><span class="toc-nav-number">4.0.1.</span> <span class="toc-nav-text">4.1&#x5757;&#x7684;&#x6982;&#x5FF5;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#42设置-副本数"><span class="toc-nav-number">4.0.2.</span> <span class="toc-nav-text">4.2&#x8BBE;&#x7F6E; &#x526F;&#x672C;&#x6570;</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#43-block大小为什么由64m128m"><span class="toc-nav-number">4.0.3.</span> <span class="toc-nav-text">4.3 block&#x5927;&#x5C0F;&#x4E3A;&#x4EC0;&#x4E48;&#x7531;64M&#x2013;&#x300B;128M</span></a></li><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#44-如何规避-小文件"><span class="toc-nav-number">4.0.4.</span> <span class="toc-nav-text">4.4 &#x5982;&#x4F55;&#x89C4;&#x907F; &#x5C0F;&#x6587;&#x4EF6;</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#hadoop02词频统计、pid、副本" title="hadoop02词频统计、pid、副本">hadoop02词频统计、pid、副本</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/tracey-c/tracey-c.github.io" target="_blank">tracey友链</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'rz'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<!-- chrome Firefox 中文锚点定位失效-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- smooth scroll behavior polyfill  -->
+<script type="text/javascript" src="/js/smoothscroll.js"></script>
+<script>
+        $('#toc').on('click','a',function(a){
+            // var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+            // console.log(window.navigator.userAgent,isChrome)
+                // if(isChrome) {
+                    // console.log(a.currentTarget.outerHTML);
+                    // console.log($(a.currentTarget).attr("href"));
+                    //跳转到指定锚点
+                    // document.getElementById(a.target.innerText.toLowerCase()).scrollIntoView(true);
+                    document.getElementById($(a.currentTarget).attr("href").replace("#","")).scrollIntoView({behavior: 'smooth' });
+                // }
+        })  
+</script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/tracey-c">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tracey 2020
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    re-Ported by <a href="http://tracey-c.github.io">tracey</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=tracey-c&repo=tracey-c.github.io&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+<!-- Search -->
+<script src="/js/search.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

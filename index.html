@@ -385,6 +385,144 @@ ls ......
 
 <div class="post-preview">
 
+    <a href="/article/hadoop03 snn流程/">
+        <h2 class="post-title">
+                                 
+            snn流程
+        </h2>
+        <h3 class="post-subtitle">
+            This is hdfs theme.
+        </h3>
+        <div class="post-content-preview">
+            1 snn流程
+1234567891011121314151617181920212223242526[hadoop@hadoop01 current]$ pwd/home/hadoop/tmp/dfs/name/current[hadoop@hadoop01 current]$ llMay 14 18:38 edits_0000000000000021201-000000000000002......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by tracey on
+            2019-09-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#snn流程" title="snn流程">snn流程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/HDFS架构/">
+        <h2 class="post-title">
+                                 
+            HDFS架构
+        </h2>
+        <h3 class="post-subtitle">
+            This is hadoop theme.
+        </h3>
+        <div class="post-content-preview">
+            1 HDFS主从架构
+
+1.1 namenode  名称节点 nn
+
+a.文件名称
+b.文件的目录结构
+c.文件的属性 权限 创建时间 副本数
+
+123456[hadoop@hadoop01 ~]$ hdfs dfs -ls  /wordcount2/input/19/10/18 20:12:38 WARN util.NativeCodeLoader: Unable to load nati......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by tracey on
+            2019-09-12
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#HDFS架构" title="HDFS架构">HDFS架构</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/HDFS副本放置策略/">
+        <h2 class="post-title">
+                                 
+            HDFS副本放置策略
+        </h2>
+        <h3 class="post-subtitle">
+            This is hadoop theme.
+        </h3>
+        <div class="post-content-preview">
+            1.HDFS副本放置策略
+
+机架 rack1 5   rack2 5
+生产上读写操作 尽量选择 某个DN节点
+第一个副本：
+放置在上传的DN节点；
+假如是非DN节点，就随机挑选一个磁盘不太慢，cpu不太忙的节点；
+第二个副本：
+放置在第一个副本不同的机架上的某个DN节点。
+第三个副本:
+与第二个副本相同机架的不同节点上。
+如果副本数设置更多，就随机放。
+...
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by tracey on
+            2019-09-11
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#HDFS副本放置策略" title="HDFS副本放置策略">HDFS副本放置策略</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/hadoop02词频统计、pid、副本数/">
+        <h2 class="post-title">
+                                 
+            hadoop02词频统计、pid、副本
+        </h2>
+        <h3 class="post-subtitle">
+            This is hadoop theme.
+        </h3>
+        <div class="post-content-preview">
+            1.词频统计
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by tracey on
+            2019-09-10
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#hadoop02词频统计、pid、副本" title="hadoop02词频统计、pid、副本">hadoop02词频统计、pid、副本</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/article/HDFS写流程/">
         <h2 class="post-title">
                                  
@@ -450,110 +588,16 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/hadoop01单节点部署/">
-        <h2 class="post-title">
-                                 
-            hadoop01单节点部署(基于CDH5.16.2)
-        </h2>
-        <h3 class="post-subtitle">
-            This is hadoop01 execises theme.
-        </h3>
-        <div class="post-content-preview">
-            Hadoop Apache官网
-生产上至今企业还是以CDH5.x为主 (cloudera公司)
-安装版本：hadoop-2.6.0-cdh5.16.2.tar.gz
-hadoop部署
-1 hadoop hdfs部署
-部署准备
-1.1 前面课程已经安装部署jdk
-jdk需安装(mysql部署时已安装）
-12[root@hadoop01 software]$ which java/usr/jav......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by tracey on
-            2019-08-10
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Hadoop01部署" title="Hadoop01部署">Hadoop01部署</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/MySQL习题/">
-        <h2 class="post-title">
-                                 
-            MySQL-数据库9道题
-        </h2>
-        <h3 class="post-subtitle">
-            This is MySQL execises theme.
-        </h3>
-        <div class="post-content-preview">
-            创建表
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061-- 1 部门表-- dept部门表(deptno部门编号/dname部门名称/loc地点)drop table IF EXISTS dept;create t......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by tracey on
-            2019-08-02
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#MySQL-execises" title="MySQL-execises">MySQL-execises</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/linux04命令/">
-        <h2 class="post-title">
-                                 
-            Linux04命令
-        </h2>
-        <h3 class="post-subtitle">
-            This is linux04 theme.
-        </h3>
-        <div class="post-content-preview">
-            1.系统常用检查命令
-(1) 磁盘 df -h
-12345678[jacket@learn01 ~]$ df -hFilesystem      Size  Used Avail Use% Mounted on/dev/vda1        40G   16G   25G  39% //dev/vdb1        2T   16G   25G  1% /data01/dev/vdb2 ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by tracey on
-            2019-07-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Linux04" title="Linux04">Linux04</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
 
 <ul class="pager">
     
+    
+        <li class="next">
+            <a href="/page/2/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -577,30 +621,6 @@ jdk需安装(mysql部署时已安装）
     sidebar-container
 ">
     
-        
-<!--
-<h5>SEARCH</h5>
-<div class="search-article" class="tags">
-	<input id="search-kw" type="text" name="search_article" placeholder="Enter keywords for search" />
-	<div class="search-img">
-		<img 
-			src="/img/search.png" 
-			alt="search" 
-			onMouseOver="this.src='/img/search-focus.png'" 
-			onMouseOut="this.src='/img/search.png'"/>
-	</div>
-</div>-->
-
-<h5>SEARCH</h5>
-<div id="site_search">
-	<div class="form-group">
-		<input type="text" id="local-search-input" name="q" results="0" placeholder="search" class="st-search-input st-default-search-input form-control"/>
-	</div>  
-	<div id="local-search-result"></div>
-</div>
-
-        <hr>
-    
         <!-- Featured Tags -->
 
 <section>
@@ -617,7 +637,11 @@ jdk需安装(mysql部署时已安装）
             
         
             
-            <a href="/tags/#MySQL-execises" title="MySQL-execises" rel="1">MySQL-execises</a>
+            <a href="/tags/#HDFS架构" title="HDFS架构" rel="1">HDFS架构</a>
+            
+        
+            
+            <a href="/tags/#HDFS副本放置策略" title="HDFS副本放置策略" rel="1">HDFS副本放置策略</a>
             
         
             
@@ -625,7 +649,19 @@ jdk需安装(mysql部署时已安装）
             
         
             
+            <a href="/tags/#MySQL-execises" title="MySQL-execises" rel="1">MySQL-execises</a>
+            
+        
+            
+            <a href="/tags/#snn流程" title="snn流程" rel="1">snn流程</a>
+            
+        
+            
             <a href="/tags/#Hadoop01部署" title="Hadoop01部署" rel="1">Hadoop01部署</a>
+            
+        
+            
+            <a href="/tags/#hadoop02词频统计、pid、副本" title="hadoop02词频统计、pid、副本" rel="1">hadoop02词频统计、pid、副本</a>
             
         
             
@@ -637,11 +673,11 @@ jdk需安装(mysql部署时已安装）
             
         
             
-            <a href="/tags/#Linux03" title="Linux03" rel="1">Linux03</a>
+            <a href="/tags/#Linux04" title="Linux04" rel="1">Linux04</a>
             
         
             
-            <a href="/tags/#Linux04" title="Linux04" rel="1">Linux04</a>
+            <a href="/tags/#Linux03" title="Linux03" rel="1">Linux03</a>
             
         
     </div>
@@ -695,23 +731,23 @@ jdk需安装(mysql部署时已安装）
     <ul>
       
         <li>
+          <a href="/article/hadoop03 snn流程/">snn流程</a>
+        </li>
+      
+        <li>
+          <a href="/article/HDFS架构/">HDFS架构</a>
+        </li>
+      
+        <li>
+          <a href="/article/HDFS副本放置策略/">HDFS副本放置策略</a>
+        </li>
+      
+        <li>
+          <a href="/article/hadoop02词频统计、pid、副本数/">hadoop02词频统计、pid、副本</a>
+        </li>
+      
+        <li>
           <a href="/article/HDFS写流程/">HDFS写流程</a>
-        </li>
-      
-        <li>
-          <a href="/article/HDFS读流程/">HDFS读流程</a>
-        </li>
-      
-        <li>
-          <a href="/article/hadoop01单节点部署/">hadoop01单节点部署(基于CDH5.16.2)</a>
-        </li>
-      
-        <li>
-          <a href="/article/MySQL习题/">MySQL-数据库9道题</a>
-        </li>
-      
-        <li>
-          <a href="/article/MySQL01/">MySQL01(安装部署)</a>
         </li>
       
     </ul>
@@ -734,7 +770,7 @@ jdk需安装(mysql部署时已安装）
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>
