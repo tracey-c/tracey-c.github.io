@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          tracey | Blog
+          MapReduce架构设计(提交流程) - tracey | Blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/page/2/">
+    <link rel="canonical" href="http://yoursite.com/article/MapReduce架构设计(提交流程)/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,8 +71,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('/img/header_img/home-bg-o.png') 
-            /*config*/
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
         
     }
     
@@ -89,10 +89,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>tracey</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading"></span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#MapReduce架构设计" title="MapReduce架构设计">MapReduce架构设计</a>
+                            
+                        </div>
+                        <h1>MapReduce架构设计(提交流程)</h1>
+                        <h2 class="subheading">This is MapReduce theme.</h2>
+                        <span class="meta">
+                            Posted by tracey on
+                            2019-09-23
+                        </span>
                     </div>
                 
 
@@ -195,314 +203,227 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-
-<div class="post-preview">
-
-    <a href="/article/hadoop01单节点部署/">
-        <h2 class="post-title">
-                                 
-            hadoop01单节点部署(基于CDH5.16.2)
-        </h2>
-        <h3 class="post-subtitle">
-            This is hadoop01 execises theme.
-        </h3>
-        <div class="post-content-preview">
-            Hadoop Apache官网
-生产上至今企业还是以CDH5.x为主 (cloudera公司)
-安装版本：hadoop-2.6.0-cdh5.16.2.tar.gz
-hadoop部署
-1 hadoop hdfs部署
-部署准备
-1.1 前面课程已经安装部署jdk
-jdk需安装(mysql部署时已安装）
-12[root@hadoop01 software]$ which java/usr/jav......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by tracey on
-            2019-08-10
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Hadoop01部署" title="Hadoop01部署">Hadoop01部署</a>
-            
-        </div>
-    
-
-</div>
+                <h4 id="1-mapreduce2x-架构设计">1 MapReduce2.x 架构设计</h4>
+<p>可认为mr on yarn提交流程    yarn的架构设计</p>
+<h6 id="11-container-容器">1.1 container 容器</h6>
+<p>container 容器  虚拟的概念是运行在nm进程所在的机器上!其实是一组memory+cpu vcore资源的组合。</p>
+<p><img src="/img/hadoop_img/container%E5%AE%B9%E5%99%A8.png" alt="avatar"><br>
+<strong>补充：linux两大机制</strong><br>
+<strong>1）oom-killer机制</strong><br>
+当Linux服务器某个进程使用内存超标 Linux机器为了保护自己，主动杀死你的进程，释放内存。<br>
+<strong>2）tmp目录 30天删除机制</strong></p>
+<p>比方：<br>
+12G–》12平方<br>
+1平方一个房间 1台电脑   cpu vcore<br>
+1平方一个房间 2台电脑<br>
+房间可以认为 container 容器</p>
+<p>12个房间<br>
+每个房间只有1G内存 用来计算</p>
+<p>房间的面积是 memory<br>
+房间的电脑是 cpu vcore<br>
+房间是  container  是虚拟的概念  其实是一组memory+cpu vcore资源的组合</p>
+<blockquote>
+<p>再比如：100件货<br>
+1 个房间  1个人：100h<br>
+升级一下<br>
+1 个房间  2个人: 50h<br>
+在内存够的情况下，适当增加cpu vcore带来计算效率的提升</p>
+</blockquote>
+<p><strong><font color="blue"> MapReduce架构</font></strong></p>
+<p>Resourcemanager  主节点  rm<br>
+ApplicationsManager  应用管理器 作业 程序<br>
+ResourceScheduler    资源调度器<br>
+NodeManager    从节点    nm<br>
+<img src="/img/hadoop_img/mr%E6%9E%B6%E6%9E%84.png" alt="avatar"><br>
+1）client向rm提交应用程序（jar） 其中已经包含ApplicationMaster主程序和启动命令<br>
+2）ApplicationsManager  会为job分配第一个container，运行ApplicationMaster<br>
+3）Applicationmaster向 ApplicationsManager注册，就可以做yarn的web界面看到这个job的运行状态<br>
+4）Applicationmaster采取轮询的方式通过【RPC】协议让ResourceScheduler，申请和领取资源（哪台nm 多个内存 多少cpu vcore）</p>
 <hr>
-
-<div class="post-preview">
-
-    <a href="/article/MySQL习题/">
-        <h2 class="post-title">
-                                 
-            MySQL-数据库9道题
-        </h2>
-        <h3 class="post-subtitle">
-            This is MySQL execises theme.
-        </h3>
-        <div class="post-content-preview">
-            创建表
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061-- 1 部门表-- dept部门表(deptno部门编号/dname部门名称/loc地点)drop table IF EXISTS dept;create t......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by tracey on
-            2019-08-02
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#MySQL-execises" title="MySQL-execises">MySQL-execises</a>
-            
-        </div>
-    
-
-</div>
+<p>启动app master（应用的主程序），领取到资源</p>
+<p>5）一旦app master拿到资源列表，就和对应的nm进程通信，要求启动的任务task 计算代码<br>
+6）NM为任务设置好运行环境(container容器 包含jar包等资源) ，将任务启动命令写在一个脚本里，并通过该脚本启动任务task<br>
+7）各个任务task通过【rpc】协议向app master汇报自己的进度和状态，以此让app master随时掌握task的运行状态。<br>
+当task运行失败，会重启任务。<br>
+8）当所有task运行完成后，app master向 apps manager申请注销和关闭作<br>
+这时在页面看 是不是完成的   完成的是成功还是失败的</p>
 <hr>
+<p>运行任务，直到任务完成。</p>
+<p>存储 HDFS hive/hbase cassandra kudu<br>
+计算 mapreduce --》hive sql/spark/flink<br>
+资源和作业调度  yarn</p>
 
-<div class="post-preview">
+                
 
-    <a href="/article/linux04命令/">
-        <h2 class="post-title">
-                                 
-            Linux04命令
-        </h2>
-        <h3 class="post-subtitle">
-            This is linux04 theme.
-        </h3>
-        <div class="post-content-preview">
-            1.系统常用检查命令
-(1) 磁盘 df -h
-12345678[jacket@learn01 ~]$ df -hFilesystem      Size  Used Avail Use% Mounted on/dev/vda1        40G   16G   25G  39% //dev/vdb1        2T   16G   25G  1% /data01/dev/vdb2 ......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by tracey on
-            2019-07-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Linux04" title="Linux04">Linux04</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-        <li class="previous">
-            <a href="/">&larr; Newer Posts</a>
-        </li>
-    
-    
-</ul>
-
-
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/article/hadoop06 关于yarn的Container调优/" data-toggle="tooltip" data-placement="top" title="关于yarn的Container调优">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/article/hadoop05 MapReduce阶段/" data-toggle="tooltip" data-placement="top" title="MapReduce阶段">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
                 <br>
 
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                <!--分享-->
+                <br>                       
+                
                 <!-- require APlayer -->
                 
 
-                <!-- 如果开启评论功能 -->
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#1-mapreduce2x-架构设计"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1 MapReduce2.x &#x67B6;&#x6784;&#x8BBE;&#x8BA1;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-6"><a class="toc-nav-link" href="#11-container-容器"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text">1.1 container &#x5BB9;&#x5668;</span></a></li></ol></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#MapReduce架构设计" title="MapReduce架构设计">MapReduce架构设计</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/tracey-c/tracey-c.github.io" target="_blank">tracey友链</a></li>
+                    
+                </ul>
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- Featured Tags -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#HDFS写流程" title="HDFS写流程" rel="1">HDFS写流程</a>
-            
-        
-            
-            <a href="/tags/#HDFS读流程" title="HDFS读流程" rel="1">HDFS读流程</a>
-            
-        
-            
-            <a href="/tags/#HDFS架构" title="HDFS架构" rel="1">HDFS架构</a>
-            
-        
-            
-            <a href="/tags/#HDFS副本放置策略" title="HDFS副本放置策略" rel="1">HDFS副本放置策略</a>
-            
-        
-            
-            <a href="/tags/#MySQL01" title="MySQL01" rel="1">MySQL01</a>
-            
-        
-            
-            <a href="/tags/#MySQL-execises" title="MySQL-execises" rel="1">MySQL-execises</a>
-            
-        
-            
-            <a href="/tags/#snn流程" title="snn流程" rel="1">snn流程</a>
-            
-        
-            
-            <a href="/tags/#Hadoop01部署" title="Hadoop01部署" rel="1">Hadoop01部署</a>
-            
-        
-            
-            <a href="/tags/#hadoop02词频统计、pid、副本" title="hadoop02词频统计、pid、副本" rel="1">hadoop02词频统计、pid、副本</a>
-            
-        
-            
-            <a href="/tags/#Linux01" title="Linux01" rel="1">Linux01</a>
-            
-        
-            
-            <a href="/tags/#Linux02" title="Linux02" rel="1">Linux02</a>
-            
-        
-            
-            <a href="/tags/#Linux04" title="Linux04" rel="1">Linux04</a>
-            
-        
-            
-            <a href="/tags/#Linux03" title="Linux03" rel="1">Linux03</a>
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">ABOUT ME</a></h5>
-    <div class="short-about">
 
-        
-            <img id = "avatar_pic" src="/img/avatar/tracey.jpg" />
-        
 
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
 
-            
 
-            
-                <li>
-                    <a target="_blank"  href="https://github.com/tracey-c">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
 
-        <hr>
-    
-        
-  <h5>RECENT POSTS</h3>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/article/hadoop03 snn流程/">snn流程</a>
-        </li>
-      
-        <li>
-          <a href="/article/HDFS架构/">HDFS架构</a>
-        </li>
-      
-        <li>
-          <a href="/article/HDFS副本放置策略/">HDFS副本放置策略</a>
-        </li>
-      
-        <li>
-          <a href="/article/hadoop02词频统计、pid、副本数/">hadoop02词频统计、pid、副本</a>
-        </li>
-      
-        <li>
-          <a href="/article/HDFS写流程/">HDFS写流程</a>
-        </li>
-      
-    </ul>
-  </div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'rz'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        <hr>
-    
-        <!-- Friends Blog -->
 
-<h5>FRIENDS</h5>
-<ul class="list-inline">
-
-    
-        <li><a href="https://github.com/tracey-c/tracey-c.github.io" target="_blank">tracey友链</a></li>
-    
-</ul>
-
-        <hr>
-    
-        
-    <h5>ARCHIVES</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li></ul>
-    </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
+<!-- chrome Firefox 中文锚点定位失效-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- smooth scroll behavior polyfill  -->
+<script type="text/javascript" src="/js/smoothscroll.js"></script>
+<script>
+        $('#toc').on('click','a',function(a){
+            // var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+            // console.log(window.navigator.userAgent,isChrome)
+                // if(isChrome) {
+                    // console.log(a.currentTarget.outerHTML);
+                    // console.log($(a.currentTarget).attr("href"));
+                    //跳转到指定锚点
+                    // document.getElementById(a.target.innerText.toLowerCase()).scrollIntoView(true);
+                    document.getElementById($(a.currentTarget).attr("href").replace("#","")).scrollIntoView({behavior: 'smooth' });
+                // }
+        })  
+</script>
 
 
     <!-- Footer -->

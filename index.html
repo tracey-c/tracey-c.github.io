@@ -215,37 +215,31 @@
 
 <div class="post-preview">
 
-    <a href="/article/MySQL01/">
+    <a href="/article/yarn的调度器/">
         <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
                                  
-            MySQL01(安装部署)
+            yarn的调度器
         </h2>
         <h3 class="post-subtitle">
-            This is MySQL01 theme.
+            This is Scheduler theme.
         </h3>
         <div class="post-content-preview">
-            一.mysql安装部署
-安装准备下载JDK及mysql的安装包
-JDK版本：jdk-8u181-linux-x64.tar.gz
-JDK下载地址:https://www.oracle.com/java/technologies/javase/javase8-archive-downloads.html
-mysql版本：mysql-5.7.11-linux-glibc2.5-x86_64.ta......
+            1 调度器
+1.1 FIFO Scheduler  先进先出
+![avatar](/img/hadoop_img/yarn FIFO.png)
+上图的示例：有一个很大的job1，它先提交，并且占据了全部的资源。
+那么job2提交时发现没有资源了，则job2必须等待job1执行结束，才能获得资源执行。
+FIFO Scheduler把应用按提交的顺序排成一个队列，这是一个先进先出队列，在进行资源......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by tracey on
-            2019-07-19
+            2019-09-28
         </p>
         <div class="tags">
             
-              <a href="/tags/#MySQL01" title="MySQL01">MySQL01</a>
+              <a href="/tags/#yarn的调度器" title="yarn的调度器">yarn的调度器</a>
             
         </div>
     
@@ -255,38 +249,36 @@ mysql版本：mysql-5.7.11-linux-glibc2.5-x86_64.ta......
 
 <div class="post-preview">
 
-    <a href="/article/linux03命令/">
+    <a href="/article/hadoop06 关于yarn的Container调优/">
         <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
                                  
-            Linux03命令
+            关于yarn的Container调优
         </h2>
         <h3 class="post-subtitle">
-            This is linux03 theme.
+            This is MapReduce theme.
         </h3>
         <div class="post-content-preview">
-            1.查看用户 用户组
-  (1)用户：ll /usr/sbin/user*
-  (2)用户组：ll /usr/sbin/group*
-  用户存储信息 /etc/passwd
-  用户组       /etc/group
-123456789101112[root@learn01 ~]# ll /usr/sbin/user*-rwxr-x--- 1 root root 118192 Nov  ......
+            1.Container
+关于Yarn的调优 就是调container
+虚拟化的 是memory+cpu vcores组成的 是运行task任务的
+生产如何调优container参数？
+假设128G  16物理core
+1.1 系统装完 消耗1G
+1.2 系统预留20%内存（包含1G）
+oom-kill机制
+Linux系统防止夯住
+给未来部署组件预留空间
+128G*20%=25.6G==26G......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by tracey on
-            2019-07-18
+            2019-09-27
         </p>
         <div class="tags">
             
-              <a href="/tags/#Linux03" title="Linux03">Linux03</a>
+              <a href="/tags/#Container调优" title="Container调优">Container调优</a>
             
         </div>
     
@@ -296,40 +288,33 @@ mysql版本：mysql-5.7.11-linux-glibc2.5-x86_64.ta......
 
 <div class="post-preview">
 
-    <a href="/article/linux02命令/">
+    <a href="/article/MapReduce架构设计(提交流程)/">
         <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
                                  
-            Linux02命令
+            MapReduce架构设计(提交流程)
         </h2>
         <h3 class="post-subtitle">
-            This is linux02 theme.
+            This is MapReduce theme.
         </h3>
         <div class="post-content-preview">
-            1.清屏
-clear或快捷键ctrl + l
-2.移动(mv)、复制(cp)命令
-2.1 mv [source] [target] (mv是始终一份  快)
- eg:不标准写法:mv dir1  data
- eg:标准写法:mv dir1  data/dir1 支持改名mv dir1  data/dir111
-2.2 cp [-R/r]  [原文件或目录][目标目录](cp是两份  慢)
- ......
+            1 MapReduce2.x 架构设计
+可认为mr on yarn提交流程    yarn的架构设计
+1.1 container 容器
+container 容器  虚拟的概念是运行在nm进程所在的机器上!其实是一组memory+cpu vcore资源的组合。
+
+补充：linux两大机制
+1）oom-killer机制
+当Linux服务器某个进程使用内存超标 Linux机器为了保护自己，主动杀死......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by tracey on
-            2019-07-18
+            2019-09-23
         </p>
         <div class="tags">
             
-              <a href="/tags/#Linux02" title="Linux02">Linux02</a>
+              <a href="/tags/#MapReduce架构设计" title="MapReduce架构设计">MapReduce架构设计</a>
             
         </div>
     
@@ -339,43 +324,61 @@ clear或快捷键ctrl + l
 
 <div class="post-preview">
 
-    <a href="/article/linux01命令/">
+    <a href="/article/hadoop05 MapReduce阶段/">
         <h2 class="post-title">
-            
-                <i class="fa fa-thumb-tack" style="color:#F4711F" ></i>
-                <!-- <i class="fa fa-thumb-tack" style="color:#F89E8C" ></i> -->
-                <!-- <i class="fa fa-thumb-tack" style="color:#1CB7ED" ></i> -->
-                <font color=#F4711F>置顶</font>
-                <!-- <font color=#F89E8C>置顶</font>  -->
-                <!-- <font color=#1CB7ED>置顶</font>  -->
                                  
-            Linux01命令
+            MapReduce阶段
         </h2>
         <h3 class="post-subtitle">
-            This is linux01 theme.
+            This is MapReduce theme.
         </h3>
         <div class="post-content-preview">
-            1.root用户了解
-1[root@learn04 ~]#
-root： 默认管理员(超级管理员)  最大权限
-learn04： 机器名称 pwd 查看当前所在路径
-~：当前该用户的家目录用  /root
-#     代表的当前用户为root
-$：代表当前是普通用户操作
-2.ls查看命令
-ls 显示文件夹及文件
-ls -l 长格式 显示权限 文件数 用户 用户组 文件大小 时间 文件名
-ls ......
+            1.MapReduce
+分布式计算框架 ，生产开发复杂累赘 基本不用生产基本使用Hivesql Spark Flink
+1.1 map
+map 映射将一组数据按照规则 映射为一组
+数据条数不会发生变化
+12345678910111213id name1   a2   b3   c4   aselect * from t;select id,name+&apos;1&apos; from t;......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by tracey on
-            2019-07-11
+            2019-09-23
         </p>
         <div class="tags">
             
-              <a href="/tags/#Linux01" title="Linux01">Linux01</a>
+              <a href="/tags/#MapReduce阶段" title="MapReduce阶段">MapReduce阶段</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/article/hadoop04 hdfs命令、回收站、数据平衡/">
+        <h2 class="post-title">
+                                 
+            hdfs命令、回收站、数据平衡
+        </h2>
+        <h3 class="post-subtitle">
+            This is hdfs theme.
+        </h3>
+        <div class="post-content-preview">
+            1.HDFS命令
+123456789101112131415161718192021[hadoop@hadoop01 hadoop]$ lltotal 132drwxr-xr-x  2 hadoop hadoop   128 Jun  3  2019 bin   #可执行脚本  命令drwxr-xr-x  2 hadoop hadoop  4096 Jun  3  2019 bin-mapr......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by tracey on
+            2019-09-21
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#hdfs命令、回收站、数据平衡" title="hdfs命令、回收站、数据平衡">hdfs命令、回收站、数据平衡</a>
             
         </div>
     
@@ -555,39 +558,6 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/article/HDFS读流程/">
-        <h2 class="post-title">
-                                 
-            HDFS读流程
-        </h2>
-        <h3 class="post-subtitle">
-            This is HDFS read theme.
-        </h3>
-        <div class="post-content-preview">
-            HDFS读流程如下图
-
-1.Client调用FileSystem的open(filePath),与NN进行RPC通信，返回该文件的部分或者全部的block列表也就是返回【FSDataInputStream】对象。
-2.Client调用【FSDataInputStream】对象的read方法,去与第一个块的最近的DN进行读取，读取完成后，会check，假如ok，就关闭与DN通信。
-假如读取失败......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by tracey on
-            2019-08-13
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#HDFS读流程" title="HDFS读流程">HDFS读流程</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -596,7 +566,7 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
     
     
         <li class="next">
-            <a href="/page/2/">Older Posts &rarr;</a>
+            <a href="/archives/2/">Older Posts &rarr;</a>
         </li>
     
 </ul>
@@ -629,11 +599,15 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
     <div class="tags">
         
             
+            <a href="/tags/#HDFS副本放置策略" title="HDFS副本放置策略" rel="1">HDFS副本放置策略</a>
+            
+        
+            
             <a href="/tags/#HDFS写流程" title="HDFS写流程" rel="1">HDFS写流程</a>
             
         
             
-            <a href="/tags/#HDFS读流程" title="HDFS读流程" rel="1">HDFS读流程</a>
+            <a href="/tags/#MapReduce架构设计" title="MapReduce架构设计" rel="1">MapReduce架构设计</a>
             
         
             
@@ -641,7 +615,7 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
             
         
             
-            <a href="/tags/#HDFS副本放置策略" title="HDFS副本放置策略" rel="1">HDFS副本放置策略</a>
+            <a href="/tags/#HDFS读流程" title="HDFS读流程" rel="1">HDFS读流程</a>
             
         
             
@@ -653,11 +627,11 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
             
         
             
-            <a href="/tags/#snn流程" title="snn流程" rel="1">snn流程</a>
+            <a href="/tags/#Hadoop01部署" title="Hadoop01部署" rel="1">Hadoop01部署</a>
             
         
             
-            <a href="/tags/#Hadoop01部署" title="Hadoop01部署" rel="1">Hadoop01部署</a>
+            <a href="/tags/#snn流程" title="snn流程" rel="1">snn流程</a>
             
         
             
@@ -665,11 +639,19 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
             
         
             
-            <a href="/tags/#Linux01" title="Linux01" rel="1">Linux01</a>
+            <a href="/tags/#Linux03" title="Linux03" rel="1">Linux03</a>
             
         
             
-            <a href="/tags/#Linux02" title="Linux02" rel="1">Linux02</a>
+            <a href="/tags/#Container调优" title="Container调优" rel="1">Container调优</a>
+            
+        
+            
+            <a href="/tags/#hdfs命令、回收站、数据平衡" title="hdfs命令、回收站、数据平衡" rel="1">hdfs命令、回收站、数据平衡</a>
+            
+        
+            
+            <a href="/tags/#MapReduce阶段" title="MapReduce阶段" rel="1">MapReduce阶段</a>
             
         
             
@@ -677,7 +659,15 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
             
         
             
-            <a href="/tags/#Linux03" title="Linux03" rel="1">Linux03</a>
+            <a href="/tags/#Linux02" title="Linux02" rel="1">Linux02</a>
+            
+        
+            
+            <a href="/tags/#Linux01" title="Linux01" rel="1">Linux01</a>
+            
+        
+            
+            <a href="/tags/#yarn的调度器" title="yarn的调度器" rel="1">yarn的调度器</a>
             
         
     </div>
@@ -731,23 +721,23 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
     <ul>
       
         <li>
-          <a href="/article/hadoop03 snn流程/">snn流程</a>
+          <a href="/article/yarn的调度器/">yarn的调度器</a>
         </li>
       
         <li>
-          <a href="/article/HDFS架构/">HDFS架构</a>
+          <a href="/article/hadoop06 关于yarn的Container调优/">关于yarn的Container调优</a>
         </li>
       
         <li>
-          <a href="/article/HDFS副本放置策略/">HDFS副本放置策略</a>
+          <a href="/article/MapReduce架构设计(提交流程)/">MapReduce架构设计(提交流程)</a>
         </li>
       
         <li>
-          <a href="/article/hadoop02词频统计、pid、副本数/">hadoop02词频统计、pid、副本</a>
+          <a href="/article/hadoop05 MapReduce阶段/">MapReduce阶段</a>
         </li>
       
         <li>
-          <a href="/article/HDFS写流程/">HDFS写流程</a>
+          <a href="/article/hadoop04 hdfs命令、回收站、数据平衡/">hdfs命令、回收站、数据平衡</a>
         </li>
       
     </ul>
@@ -770,7 +760,7 @@ nn根据上传的文件大小，根据块大小+副本数参数，计算要上�
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li></ul>
     </div>
 
         <hr>
