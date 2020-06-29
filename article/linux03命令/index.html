@@ -153,14 +153,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -220,7 +220,7 @@
 <p>  (1)用户：ll /usr/sbin/user*<br>
   (2)用户组：ll /usr/sbin/group*<br>
   用户存储信息 /etc/passwd<br>
-  用户组       /etc/group</p>
+  用户组存储信息 /etc/group</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# ll /usr/sbin/user*</span><br><span class="line">-rwxr-x--- 1 root root 118192 Nov  6  2016 /usr/sbin/useradd</span><br><span class="line">-rwxr-x--- 1 root root  80360 Nov  6  2016 /usr/sbin/userdel</span><br><span class="line">-rwxr-x--- 1 root root 113840 Nov  6  2016 /usr/sbin/usermod</span><br><span class="line">-rwsr-xr-x 1 root root  11296 Apr 13  2017 /usr/sbin/usernetctl</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# ll /usr/sbin/group*</span><br><span class="line">-rwxr-x--- 1 root root 65480 Nov  6  2016 /usr/sbin/groupadd</span><br><span class="line">-rwxr-x--- 1 root root 57016 Nov  6  2016 /usr/sbin/groupdel</span><br><span class="line">-rwxr-x--- 1 root root 57064 Nov  6  2016 /usr/sbin/groupmems</span><br><span class="line">-rwxr-x--- 1 root root 76424 Nov  6  2016 /usr/sbin/groupmod</span><br></pre></td></tr></table></figure>
 <h4 id="2创建-删除用户-用户组">2.创建、删除用户 用户组</h4>
 <p>(1) 创建用户：useradd 用户名</p>
@@ -234,7 +234,7 @@
   groupadd bigdata<br>
   添加用户到xx用户组： usermod    -a -G 组名 用户名<br>
 添加用户到bigdata用户组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# groupadd bigdata</span><br><span class="line">[root@learn01 ~]# usermod    -a -G bigdata      jacket</span><br><span class="line">[root@learn01 ~]# id jacket</span><br><span class="line">uid=1004(jacket) gid=1004(jacket) groups=1004(jacket),1005(bigdata)</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# usermod -g bigdata jacket</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[rroot@learn01 ~]# id jacket</span><br><span class="line">uid=1004(jacket) gid=1005(bigdata) groups=1005(bigdata)</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# usermod    -a -G jacket      jacket</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# id ruoze</span><br><span class="line">uid=1004(jacket) gid=1005(bigdata) groups=1005(bigdata),1004(jacket)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@learn01 ~]# groupadd bigdata</span><br><span class="line">[root@learn01 ~]# usermod    -a -G bigdata      jacket</span><br><span class="line">[root@learn01 ~]# id jacket</span><br><span class="line">uid=1004(jacket) gid=1004(jacket) groups=1004(jacket),1005(bigdata)</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# usermod -g bigdata jacket</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[rroot@learn01 ~]# id jacket</span><br><span class="line">uid=1004(jacket) gid=1005(bigdata) groups=1005(bigdata)</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# usermod    -a -G jacket      jacket</span><br><span class="line">[root@learn01 ~]# </span><br><span class="line">[root@learn01 ~]# id jacket</span><br><span class="line">uid=1004(jacket) gid=1005(bigdata) groups=1005(bigdata),1004(jacket)</span><br></pre></td></tr></table></figure>
 <p>(3)删除用户 :userdel 用户名<br>
   userdel jacket<br>
   删除、恢复样式<br>
@@ -333,12 +333,12 @@ else<br>
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/MySQL01/" data-toggle="tooltip" data-placement="top" title="MySQL01(安装部署)">&larr; Previous Post</a>
+                            <a href="/article/linux04命令/" data-toggle="tooltip" data-placement="top" title="Linux04命令">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/article/linux04命令/" data-toggle="tooltip" data-placement="top" title="Linux04命令">Next Post &rarr;</a>
+                            <a href="/article/linux02命令/" data-toggle="tooltip" data-placement="top" title="Linux02命令">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
