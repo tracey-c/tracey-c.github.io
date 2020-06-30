@@ -217,7 +217,7 @@
                 post-container">
 
                 <p>HDFS读流程如下图<br>
-<img src="hdfs_read.jpg" alt="avatar"></p>
+<img src="/img/hadoop_img/hdfs_read.jpg" alt="avatar"></p>
 <p>1.Client调用FileSystem的open(filePath),与NN进行RPC通信，返回该文件的部分或者全部的block列表也就是返回【FSDataInputStream】对象。</p>
 <p>2.Client调用【FSDataInputStream】对象的read方法,去与第一个块的最近的DN进行读取，读取完成后，会check，假如ok，就关闭与DN通信。<br>
 假如读取失败，会记录DN+block信息，下次就不会从这个节点读取。那么就从第二个节点读取。</p>

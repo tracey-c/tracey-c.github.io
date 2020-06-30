@@ -217,7 +217,7 @@
                 post-container">
 
                 <p>HDFS读流程如下图<br>
-<img src="hdfs_write.jpg" alt="avatar"></p>
+<img src="/img/hadoop_img/hdfs_write.jpg" alt="avatar"></p>
 <p>1.HDFS Client调用FileSystem.create(filePath)方法，去和NN进行【RPC】通信！<br>
 NN 会去check这个路径的文件是否已经存在，是否有权限能够创建这个文件！<br>
 假如都ok，就去创建一个新的文件，但是这时还没写数据，是不关联任何的block。<br>

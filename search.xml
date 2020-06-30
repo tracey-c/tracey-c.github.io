@@ -179,7 +179,7 @@
       <link href="/article/HDFS%E5%86%99%E6%B5%81%E7%A8%8B/"/>
       <url>/article/HDFS%E5%86%99%E6%B5%81%E7%A8%8B/</url>
       
-        <content type="html"><![CDATA[<p>HDFS读流程如下图<br><img src="hdfs_write.jpg" alt="avatar"></p><p>1.HDFS Client调用FileSystem.create(filePath)方法，去和NN进行【RPC】通信！<br>NN 会去check这个路径的文件是否已经存在，是否有权限能够创建这个文件！<br>假如都ok，就去创建一个新的文件，但是这时还没写数据，是不关联任何的block。<br>nn根据上传的文件大小，根据块大小+副本数参数，计算要上传多少块和块存储在DN的位置。最终将这些信息返回给客户端，为【FSDataOutputStream】对象.</p><p>2.Client调用【FSDataOutputStream】对象的write方法，将第一个块的第一个副本数写第一个DN节点，写完去第二个副本写DN2；写完去第三个副本写DN3。<br>当第三个副本写完，就返回一个ack packet确定包给DN2节点，<br>当DN2节点收到这个ack packet确定包加上自己也是写完了，就返回一个ack packet确定包给第一个DN1节点，当DN1节点收到这个ack packet确定包加上自己也是写完了，<br>将ack packet确定包返回给【FSDataOutputStream】对象，就标识第一个块的三个副本写完。其他块以此类推！</p><p>3.当所有的块全部写完， client调用 【FSDataOutputStream】对象的close方法，<br>关闭输出流。再次调用FileSystem.complete方法，告诉nn文件写成功！</p>]]></content>
+        <content type="html"><![CDATA[<p>HDFS读流程如下图<br><img src="/img/hadoop_img/hdfs_write.jpg" alt="avatar"></p><p>1.HDFS Client调用FileSystem.create(filePath)方法，去和NN进行【RPC】通信！<br>NN 会去check这个路径的文件是否已经存在，是否有权限能够创建这个文件！<br>假如都ok，就去创建一个新的文件，但是这时还没写数据，是不关联任何的block。<br>nn根据上传的文件大小，根据块大小+副本数参数，计算要上传多少块和块存储在DN的位置。最终将这些信息返回给客户端，为【FSDataOutputStream】对象.</p><p>2.Client调用【FSDataOutputStream】对象的write方法，将第一个块的第一个副本数写第一个DN节点，写完去第二个副本写DN2；写完去第三个副本写DN3。<br>当第三个副本写完，就返回一个ack packet确定包给DN2节点，<br>当DN2节点收到这个ack packet确定包加上自己也是写完了，就返回一个ack packet确定包给第一个DN1节点，当DN1节点收到这个ack packet确定包加上自己也是写完了，<br>将ack packet确定包返回给【FSDataOutputStream】对象，就标识第一个块的三个副本写完。其他块以此类推！</p><p>3.当所有的块全部写完， client调用 【FSDataOutputStream】对象的close方法，<br>关闭输出流。再次调用FileSystem.complete方法，告诉nn文件写成功！</p>]]></content>
       
       
       
@@ -198,7 +198,7 @@
       <link href="/article/HDFS%E8%AF%BB%E6%B5%81%E7%A8%8B/"/>
       <url>/article/HDFS%E8%AF%BB%E6%B5%81%E7%A8%8B/</url>
       
-        <content type="html"><![CDATA[<p>HDFS读流程如下图<br><img src="hdfs_read.jpg" alt="avatar"></p><p>1.Client调用FileSystem的open(filePath),与NN进行RPC通信，返回该文件的部分或者全部的block列表也就是返回【FSDataInputStream】对象。</p><p>2.Client调用【FSDataInputStream】对象的read方法,去与第一个块的最近的DN进行读取，读取完成后，会check，假如ok，就关闭与DN通信。<br>假如读取失败，会记录DN+block信息，下次就不会从这个节点读取。那么就从第二个节点读取。</p><p>然后去与第二个块的最近的DN进行读取，以此类推。<br>假如当block列表全部读取完成，文件还没读取结束，就调用FileSystem从nn获取下一批次的block列表。</p><p>3.Client调用【FSDataInputStream】对象close方法，关闭输入流。</p>]]></content>
+        <content type="html"><![CDATA[<p>HDFS读流程如下图<br><img src="/img/hadoop_img/hdfs_read.jpg" alt="avatar"></p><p>1.Client调用FileSystem的open(filePath),与NN进行RPC通信，返回该文件的部分或者全部的block列表也就是返回【FSDataInputStream】对象。</p><p>2.Client调用【FSDataInputStream】对象的read方法,去与第一个块的最近的DN进行读取，读取完成后，会check，假如ok，就关闭与DN通信。<br>假如读取失败，会记录DN+block信息，下次就不会从这个节点读取。那么就从第二个节点读取。</p><p>然后去与第二个块的最近的DN进行读取，以此类推。<br>假如当block列表全部读取完成，文件还没读取结束，就调用FileSystem从nn获取下一批次的block列表。</p><p>3.Client调用【FSDataInputStream】对象close方法，关闭输入流。</p>]]></content>
       
       
       
